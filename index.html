@@ -17,6 +17,39 @@
     <span class="sample-band__full">本サイトはWeb制作のサンプルです。掲載の店舗・電話番号・料金はすべて架空のものです。</span>
   </p>
 
+  <!-- 固定ヘッダー（PC・1080px〜のみ表示。references/kawaoto_pc_01_fv_v1.png に合わせる） -->
+  <header class="site-header">
+    <a class="logo" href="#top" aria-label="料亭 川音">
+      <span class="logo__small">料亭</span><span class="logo__large">川音</span>
+    </a>
+    <nav class="site-nav" aria-label="ページ内メニュー">
+      <ul class="site-nav__list">
+        <li><a href="#reasons">選ばれる理由</a></li>
+        <li><a href="#scenes">ご利用シーン</a></li>
+        <li><a href="#rooms">お部屋</a></li>
+        <li><a href="#price">料金</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__actions">
+      <a class="header-tel" href="tel:0820000000">
+        <svg class="header-tel__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
+        </svg>
+        <span class="header-tel__text">082-000-0000<small>受付 10:00〜21:00</small></span>
+      </a>
+      <a class="btn btn--web" href="#reserve">
+        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
+          <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
+          <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
+          <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
+        </svg>
+        <span class="btn__text">Webで予約する<small>24時間受付</small></span>
+      </a>
+    </div>
+  </header>
+
   <main>
     <!-- ファーストビュー：写真エリア ＋ 明るいエリア -->
     <section class="hero" aria-labelledby="hero-title">
@@ -90,42 +123,44 @@
     <!-- 以降のセクション（選ばれる理由〜アクセス）は次の作業で追加 -->
   </main>
 
-  <!-- メニュー（スマホ） -->
-  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="メニュー" inert>
-    <div class="menu__head">
-      <span class="menu__title">メニュー</span>
-      <button class="menu__close" type="button" aria-label="メニューを閉じる">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-          <path d="M6 6l12 12M18 6L6 18"/>
-        </svg>
-      </button>
-    </div>
-    <nav aria-label="ページ内メニュー">
-      <ul class="menu__list">
-        <li><a href="#reasons">選ばれる理由</a></li>
-        <li><a href="#scenes">ご利用シーン</a></li>
-        <li><a href="#rooms">お部屋</a></li>
-        <li><a href="#price">料金</a></li>
-        <li><a href="#faq">よくある質問</a></li>
-        <li><a href="#access">アクセス</a></li>
-      </ul>
-    </nav>
-    <div class="menu__cta">
-      <a class="btn btn--tel" href="tel:0820000000">
-        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-        </svg>
-        <span class="btn__text">電話で予約・相談する<small>受付 10:00〜21:00</small></span>
-      </a>
-      <a class="btn btn--web" href="#reserve">
-        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
-          <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
-          <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
-          <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
-        </svg>
-        <span class="btn__text">Webで予約する<small>24時間受付</small></span>
-      </a>
+  <!-- メニュー（タブレット・スマホ）。タブレットは右からのパネル＋半透明の層、スマホは全画面 -->
+  <div class="menu" id="menu" inert>
+    <div class="menu__panel" role="dialog" aria-modal="true" aria-label="メニュー">
+      <div class="menu__head">
+        <span class="menu__title">メニュー</span>
+        <button class="menu__close" type="button" aria-label="メニューを閉じる">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18"/>
+          </svg>
+        </button>
+      </div>
+      <nav aria-label="ページ内メニュー">
+        <ul class="menu__list">
+          <li><a href="#reasons">選ばれる理由</a></li>
+          <li><a href="#scenes">ご利用シーン</a></li>
+          <li><a href="#rooms">お部屋</a></li>
+          <li><a href="#price">料金</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#access">アクセス</a></li>
+        </ul>
+      </nav>
+      <div class="menu__cta">
+        <a class="btn btn--tel" href="tel:0820000000">
+          <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
+          </svg>
+          <span class="btn__text">電話で予約・相談する<small>受付 10:00〜21:00</small></span>
+        </a>
+        <a class="btn btn--web" href="#reserve">
+          <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
+            <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
+            <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
+            <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
+          </svg>
+          <span class="btn__text">Webで予約する<small>24時間受付</small></span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -174,6 +209,11 @@
 
       button.addEventListener('click', function () { setOpen(true); });
       closeButton.addEventListener('click', function () { setOpen(false, true); });
+
+      // タブレットの半透明の層（パネルの外側）をクリック・タップしたら閉じる
+      menu.addEventListener('click', function (e) {
+        if (e.target === menu) setOpen(false, false);
+      });
 
       // 項目を押したら閉じて、そのままページ内の移動を行う
       menu.querySelectorAll('a').forEach(function (link) {

@@ -13,6 +13,7 @@
   --color-muted: #5E5754;
   --color-line: #C9C6BF;
   --color-ai: #1F3B4D;
+  --color-ai-hover: #1A3241;
   --color-on-dark: #E6E3DC;
 
   /* 余白（DESIGN.md §4） */
@@ -29,6 +30,7 @@
   --header-height: 64px; /* 固定ヘッダー（1080px〜） */
   --fv-peek: 30px; /* 写真の下に、明るいエリアをのぞかせる高さ */
   --fv-photo-min: 470px; /* キャッチとサブコピーが重ならない、写真の最低の高さ（実測: キャッチ下端290px＋サブコピー163px＋余白17px） */
+  --menu-panel-width: 380px; /* タブレットのメニューパネルの幅 */
   color-scheme: light;
 }
 
@@ -204,6 +206,11 @@ a {
   background: transparent;
   color: #FFFFFF;
   cursor: pointer;
+}
+
+/* 固定ヘッダー（PC・1080px〜のみ表示） */
+.site-header {
+  display: none;
 }
 
 /* 縦書きのキャッチコピー（写真の上部、川の上の暗い夜空）。折り返さず2列を保つ */
@@ -386,7 +393,24 @@ a {
   border: 1px solid var(--color-ink);
 }
 
-.btn--web:hover {
+/* ホバーできる環境だけ、ホバーで色を変える（タッチ端末でのホバー固着を避ける）。
+   キーボード操作のフォーカス時は、環境によらず同じ見た目にする */
+@media (hover: hover) {
+  .btn--tel:hover {
+    background: var(--color-ai-hover);
+  }
+
+  .btn--web:hover {
+    background: var(--color-ink);
+    color: #FFFFFF;
+  }
+}
+
+.btn--tel:focus-visible {
+  background: var(--color-ai-hover);
+}
+
+.btn--web:focus-visible {
   background: var(--color-ink);
   color: #FFFFFF;
 }
@@ -437,17 +461,16 @@ a {
   flex: 1 1 auto;
 }
 
-/* ---------- メニュー（スマホ） ----------
+/* ---------- メニュー（タブレット・スマホ） ----------
+   .menu は外側の層（スマホは見えない。タブレットは半透明の暗い層）。
+   .menu__panel が中身で、スマホは全画面、タブレットは右からスライドする幅380pxのパネル。
    開閉は透明度だけで変える（DESIGN.md §5 の「浮き上がる動き」は使わない）。
    閉じるときは、フェードが終わってから見えなくする */
 .menu {
   position: fixed;
   inset: 0;
   z-index: 20;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  background: var(--color-base);
-  padding: env(safe-area-inset-top, 0px) var(--space-2) env(safe-area-inset-bottom, 0px);
+  background: transparent;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
@@ -457,6 +480,15 @@ a {
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.menu__panel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-base);
+  padding: env(safe-area-inset-top, 0px) var(--space-2) env(safe-area-inset-bottom, 0px);
 }
 
 .menu__head {
@@ -498,6 +530,7 @@ a {
 
 .menu__list a {
   display: block;
+  position: relative;
   padding: 16px 0;
   font-family: var(--font-mincho);
   font-size: 18px;
@@ -512,7 +545,57 @@ a {
   padding-bottom: var(--space-3);
 }
 
-/* ---------- 〜767px の余白調整 ---------- */
+/* 文字の下に、左から伸びる1pxの線（ホバー・フォーカス共通）。
+   widthではなくtransform: scaleXで伸ばす（inline-blockの子要素でも確実に効くため） */
+.menu__list a::after,
+.site-nav__list a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s;
+}
+
+.site-nav__list a::after {
+  bottom: -6px;
+}
+
+@media (hover: hover) {
+  .menu__list a:hover::after,
+  .site-nav__list a:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.menu__list a:focus-visible::after,
+.site-nav__list a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---------- タブレット（768〜1079px）：右からスライドするパネル＋半透明の層 ---------- */
+@media (min-width: 768px) and (max-width: 1079px) {
+  .menu.is-open {
+    background: rgba(33, 24, 21, 0.5);
+  }
+
+  .menu__panel {
+    left: auto;
+    width: var(--menu-panel-width);
+    border-left: 1px solid var(--color-line);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .menu.is-open .menu__panel {
+    transform: translateX(0);
+  }
+}
+
 /* ---------- 768px〜：PC用の写真（横長）を使う ---------- */
 @media (min-width: 768px) {
   :root {
@@ -524,20 +607,136 @@ a {
   }
 }
 
-/* ---------- PC（1080px〜）：固定バーを消し、固定ヘッダーの高さを引く ---------- */
+/* ---------- PC（1080px〜）：固定ヘッダーに切り替え、固定バー・三本線メニューは使わない ---------- */
 @media (min-width: 1080px) {
-  .fixed-bar {
+  .fixed-bar,
+  .menu-button,
+  .menu,
+  .hero__head {
     display: none;
   }
 
   body {
     padding-bottom: 0;
+    /* 固定ヘッダーの高さ分、ページ先頭に余白を確保する */
+    padding-top: var(--header-height);
   }
 
   /* 固定バーの代わりに、固定ヘッダーの高さを引く */
   .hero__photo {
     height: calc(100vh - var(--band-height) - var(--header-height) - var(--fv-peek));
     height: calc(100svh - var(--band-height) - var(--header-height) - var(--fv-peek));
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    height: var(--header-height);
+    padding-inline: max(40px, calc((100% - 1120px) / 2));
+    background: var(--color-ink);
+    color: #FFFFFF;
+  }
+
+  .site-header .logo {
+    flex: none;
+  }
+
+  .site-nav {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-nav__list {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav__list a {
+    position: relative;
+    display: inline-block; /* ::afterのwidth:100%を文字幅に対して解決させるため */
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: var(--font-mincho);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .site-header__actions {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .header-tel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+
+  .header-tel__text {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-tel__text small {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--color-on-dark);
+  }
+
+  .site-header .btn--web {
+    min-height: 48px;
+    padding: 8px 20px;
+  }
+}
+
+/* ヘッダーの電話番号にも、同じ下線のホバー・フォーカスを付ける */
+@media (min-width: 1080px) {
+  .header-tel {
+    position: relative;
+  }
+
+  .header-tel::after {
+    content: "";
+    position: absolute;
+    left: 28px;
+    right: 0;
+    bottom: -6px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s;
+  }
+}
+
+@media (min-width: 1080px) and (hover: hover) {
+  .header-tel:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 1080px) {
+  .header-tel:focus-visible::after {
+    transform: scaleX(1);
   }
 }
 
