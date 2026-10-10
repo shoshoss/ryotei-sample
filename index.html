@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>料亭 川音</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- サンプル表記（上部の帯）。スマホ（〜767px）は短い1行、768px〜はCONTENT.mdの全文 -->
+  <p class="sample-band">
+    <span class="sample-band__short">制作サンプルです。店舗・料金・電話番号は架空です。</span>
+    <span class="sample-band__full">本サイトはWeb制作のサンプルです。掲載の店舗・電話番号・料金はすべて架空のものです。</span>
+  </p>
+
+  <main>
+    <!-- ファーストビュー：写真エリア ＋ 明るいエリア -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__photo">
+        <picture>
+          <source media="(min-width: 768px)" srcset="images/kawaoto_01_fv_pc_1024w.webp 1024w, images/kawaoto_01_fv_pc_1600w.webp 1600w" sizes="100vw">
+          <source srcset="images/kawaoto_02_fv_sp_750w.webp 750w, images/kawaoto_02_fv_sp_1080w.webp 1080w" sizes="100vw">
+          <img src="images/kawaoto_02_fv_sp_750w.webp" width="750" height="1000" alt="窓の外に夜の川が見える個室" fetchpriority="high">
+        </picture>
+
+        <div class="hero__head">
+          <a class="logo" href="#top" aria-label="料亭 川音">
+            <span class="logo__small">料亭</span><span class="logo__large">川音</span>
+          </a>
+          <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu" aria-label="メニュー">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+              <path d="M3 7h18M3 12h18M3 17h18"/>
+            </svg>
+          </button>
+        </div>
+
+        <h1 class="hero__copy" id="hero-title">
+          <span class="hero__line">話が進む、</span>
+          <span class="hero__line">静かな個室。</span>
+        </h1>
+
+        <p class="hero__sub">川のほとりの料亭。料理長が瀬戸内の旬で仕立てる会席で、大切な席をおもてなしいたします。</p>
+      </div>
+
+      <div class="hero__info">
+        <ul class="trust">
+          <li class="trust__item">
+            <svg class="trust__icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2.17 12.6A12 12 0 0 1 21.83 12.6L16.1 16.63A5 5 0 0 0 7.9 16.63Z"/>
+              <path d="M12 14.5V7.5M9.69 15.06L6.46 8.86M14.31 15.06L17.54 8.86"/>
+              <path d="M7.9 16.63L12 19.5L16.1 16.63"/>
+            </svg>
+            <span class="trust__text">創業<br>昭和38年</span>
+          </li>
+          <li class="trust__item">
+            <svg class="trust__icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="7.5" r="2.6"/>
+              <path d="M7.5 18.5v-1a4.5 4.5 0 0 1 9 0v1"/>
+              <circle cx="5.5" cy="9.5" r="1.9"/>
+              <path d="M2.5 17.5v-.6a3 3 0 0 1 4.2-2.75"/>
+              <circle cx="18.5" cy="9.5" r="1.9"/>
+              <path d="M21.5 17.5v-.6a3 3 0 0 0-4.2-2.75"/>
+            </svg>
+            <span class="trust__text">全室個室<br>2〜40名様</span>
+          </li>
+          <li class="trust__item">
+            <svg class="trust__icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5.5 12.5l1.6-3.9a1.2 1.2 0 0 1 1.1-.75h7.6a1.2 1.2 0 0 1 1.1.75l1.6 3.9"/>
+              <path d="M3.5 13.5a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/>
+              <path d="M6.5 18v1.5M17.5 18v1.5"/>
+              <circle cx="7" cy="15.2" r="0.8"/>
+              <circle cx="17" cy="15.2" r="0.8"/>
+            </svg>
+            <span class="trust__text">八丁堀から<br>車で約5分</span>
+          </li>
+        </ul>
+
+        <p class="price-line">
+          <span class="price-line__course">川音会席</span>
+          <span class="price-line__price">8,800円〜</span>
+          <span class="price-line__note">（税込）</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- 以降のセクション（選ばれる理由〜アクセス）は次の作業で追加 -->
+  </main>
+
+  <!-- メニュー（スマホ） -->
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="メニュー" inert>
+    <div class="menu__head">
+      <span class="menu__title">メニュー</span>
+      <button class="menu__close" type="button" aria-label="メニューを閉じる">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+    </div>
+    <nav aria-label="ページ内メニュー">
+      <ul class="menu__list">
+        <li><a href="#reasons">選ばれる理由</a></li>
+        <li><a href="#scenes">ご利用シーン</a></li>
+        <li><a href="#rooms">お部屋</a></li>
+        <li><a href="#price">料金</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#access">アクセス</a></li>
+      </ul>
+    </nav>
+    <div class="menu__cta">
+      <a class="btn btn--tel" href="tel:0820000000">
+        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
+        </svg>
+        <span class="btn__text">電話で予約・相談する<small>受付 10:00〜21:00</small></span>
+      </a>
+      <a class="btn btn--web" href="#reserve">
+        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
+          <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
+          <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
+          <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
+        </svg>
+        <span class="btn__text">Webで予約する<small>24時間受付</small></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 固定バー（〜1079px） -->
+  <nav class="fixed-bar" aria-label="予約">
+    <a class="btn btn--tel" href="tel:0820000000">
+      <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
+      </svg>
+      <span class="btn__text">電話で予約・相談する<small>受付 10:00〜21:00</small></span>
+    </a>
+    <a class="btn btn--web" href="#reserve">
+      <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
+        <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
+        <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
+        <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
+      </svg>
+      <span class="btn__text">Webで予約する<small>24時間受付</small></span>
+    </a>
+  </nav>
+
+  <script>
+    (function () {
+      var button = document.querySelector('.menu-button');
+      var menu = document.getElementById('menu');
+      var closeButton = menu.querySelector('.menu__close');
+      var isOpen = false;
+
+      // 開閉の状態をまとめて切り替える。
+      // 閉じるときは背景の固定を外し、フェードが終わるまでは表示したままにする
+      function setOpen(open, returnFocus) {
+        if (open === isOpen) return;
+        isOpen = open;
+        menu.classList.toggle('is-open', open);
+        menu.inert = !open;
+        button.setAttribute('aria-expanded', String(open));
+        document.documentElement.classList.toggle('is-locked', open);
+
+        if (open) {
+          closeButton.focus({ preventScroll: true });
+        } else if (returnFocus) {
+          button.focus({ preventScroll: true });
+        }
+      }
+
+      button.addEventListener('click', function () { setOpen(true); });
+      closeButton.addEventListener('click', function () { setOpen(false, true); });
+
+      // 項目を押したら閉じて、そのままページ内の移動を行う
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false, false); });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false, true);
+      });
+    })();
+  </script>
+</body>
+</html>
