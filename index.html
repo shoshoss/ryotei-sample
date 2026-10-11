@@ -842,6 +842,225 @@
 				</div>
 			</section>
 
+			<!-- 幹事様向けサポート -->
+			<section class="support" id="support" aria-labelledby="support-title">
+				<h2 class="section-title" id="support-title">幹事様向けサポート</h2>
+				<ul class="support__list">
+					<li>請求書でのお支払い（法人様）</li>
+					<li>領収書の宛名のご指定</li>
+					<li>お手土産の手配</li>
+					<li>席札のご用意</li>
+					<li>ご人数の変更は前日まで承ります</li>
+					<li>送迎（広島市中区内・10名様以上）</li>
+					<li>駐車場3台</li>
+				</ul>
+			</section>
+
+			<!-- ご予約の流れ -->
+			<section class="flow" id="flow" aria-labelledby="flow-title">
+				<h2 class="section-title" id="flow-title">ご予約の流れ</h2>
+
+				<div class="flow__group">
+					<h3 class="flow__group-title">お電話の場合</h3>
+					<ol class="flow__steps">
+						<li class="flow__step">
+							<span class="flow__number">1</span>
+							<p class="flow__text">お電話ください（受付 10:00〜21:00）</p>
+						</li>
+						<li class="flow__step">
+							<span class="flow__number">2</span>
+							<p class="flow__text">
+								ご希望の日時、ご人数、ご用途、ご予算をお伺いします
+							</p>
+						</li>
+						<li class="flow__step">
+							<span class="flow__number">3</span>
+							<p class="flow__text">お部屋とコースをご提案します</p>
+						</li>
+						<li class="flow__step">
+							<span class="flow__number">4</span>
+							<p class="flow__text">ご予約の確定</p>
+						</li>
+					</ol>
+				</div>
+
+				<div class="flow__group">
+					<h3 class="flow__group-title">Webの場合</h3>
+					<ol class="flow__steps">
+						<li class="flow__step">
+							<span class="flow__number">1</span>
+							<p class="flow__text">予約フォームに入力（24時間受付）</p>
+						</li>
+						<li class="flow__step">
+							<span class="flow__number">2</span>
+							<p class="flow__text">翌営業日までに、お電話でご連絡します</p>
+						</li>
+						<li class="flow__step">
+							<span class="flow__number">3</span>
+							<p class="flow__text">ご予約の確定</p>
+						</li>
+					</ol>
+				</div>
+			</section>
+
+			<!-- 予約フォーム -->
+			<section class="reserve" id="reserve" aria-labelledby="reserve-title">
+				<h2 class="section-title" id="reserve-title">Webで予約する</h2>
+
+				<form class="reserve-form" novalidate>
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-date">ご希望日</label>
+						<input
+							class="reserve-form__input"
+							type="date"
+							id="f-date"
+							name="date"
+							required
+						/>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-time">ご希望の時間</label>
+						<select
+							class="reserve-form__input"
+							id="f-time"
+							name="time"
+							required
+						>
+							<option value="" selected disabled>選択してください</option>
+							<option value="17:30">17:30</option>
+							<option value="18:00">18:00</option>
+							<option value="18:30">18:30</option>
+							<option value="19:00">19:00</option>
+							<option value="19:30">19:30</option>
+							<option value="20:00">20:00</option>
+						</select>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-people">ご人数</label>
+						<select
+							class="reserve-form__input"
+							id="f-people"
+							name="people"
+							required
+						>
+							<option value="" selected disabled>選択してください</option>
+							<option value="2名">2名</option>
+							<option value="3名">3名</option>
+							<option value="4名">4名</option>
+							<option value="5名">5名</option>
+							<option value="6名">6名</option>
+							<option value="7名">7名</option>
+							<option value="8名">8名</option>
+							<option value="9名">9名</option>
+							<option value="10名">10名</option>
+							<option value="11〜20名">11〜20名</option>
+							<option value="21〜30名">21〜30名</option>
+							<option value="31〜40名">31〜40名</option>
+						</select>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-purpose">ご用途</label>
+						<select
+							class="reserve-form__input"
+							id="f-purpose"
+							name="purpose"
+							required
+						>
+							<option value="" selected disabled>選択してください</option>
+							<option value="ご接待・ご会食">ご接待・ご会食</option>
+							<option value="ご宴会">ご宴会</option>
+							<option value="慶事・法事">慶事・法事</option>
+							<option value="ご旅行・記念日">ご旅行・記念日</option>
+							<option value="その他">その他</option>
+						</select>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-budget">ご予算</label>
+						<select
+							class="reserve-form__input"
+							id="f-budget"
+							name="budget"
+							required
+						>
+							<option value="" selected disabled>選択してください</option>
+							<option value="川音会席 8,800円">川音会席 8,800円</option>
+							<option value="川音会席 12,100円">川音会席 12,100円</option>
+							<option value="川音会席 16,500円">川音会席 16,500円</option>
+							<option value="特別会席（ご相談）">特別会席（ご相談）</option>
+							<option value="未定">未定</option>
+						</select>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-name">お名前</label>
+						<input
+							class="reserve-form__input"
+							type="text"
+							id="f-name"
+							name="name"
+							autocomplete="name"
+							required
+						/>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-tel">電話番号</label>
+						<input
+							class="reserve-form__input"
+							type="tel"
+							id="f-tel"
+							name="tel"
+							autocomplete="tel"
+							required
+						/>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-email"
+							>メールアドレス（任意）</label
+						>
+						<input
+							class="reserve-form__input"
+							type="email"
+							id="f-email"
+							name="email"
+							autocomplete="email"
+						/>
+					</div>
+
+					<div class="reserve-form__field">
+						<label class="reserve-form__label" for="f-request"
+							>ご要望（任意）</label
+						>
+						<textarea
+							class="reserve-form__input reserve-form__textarea"
+							id="f-request"
+							name="request"
+							rows="4"
+						></textarea>
+					</div>
+
+					<button class="reserve-form__submit" type="submit">
+						予約を申し込む
+					</button>
+
+					<p class="reserve-form__note">
+						翌営業日までに、お電話でご連絡します。ご予約はその時点で確定となります。
+					</p>
+					<p
+						class="reserve-form__note reserve-form__note--confirm"
+						aria-live="polite"
+						tabindex="-1"
+					>
+						本サイトはサンプルのため、送信されません。
+					</p>
+				</form>
+			</section>
+
 			<!-- 以降のセクション（アクセスなど）は次の作業で追加 -->
 		</main>
 
@@ -1056,6 +1275,22 @@
 
 				document.addEventListener("keydown", function (e) {
 					if (e.key === "Escape") setOpen(false, true);
+				});
+			})();
+		</script>
+
+		<script>
+			// 予約フォーム：サンプルのため送信しない。
+			// 押したら、既にある注記（送信されない旨）を強調し、そこへ読み上げ・フォーカスを移す
+			(function () {
+				var form = document.querySelector(".reserve-form");
+				if (!form) return;
+				var confirmNote = form.querySelector(".reserve-form__note--confirm");
+
+				form.addEventListener("submit", function (e) {
+					e.preventDefault();
+					confirmNote.classList.add("is-shown");
+					confirmNote.focus();
 				});
 			})();
 		</script>
