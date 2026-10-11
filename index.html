@@ -36,7 +36,7 @@
         <svg class="header-tel__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
         </svg>
-        <span class="header-tel__text">082-000-0000<small>受付 10:00〜21:00</small></span>
+        <span class="header-tel__text"><span class="btn__label">082-000-0000</span><small>受付 10:00〜21:00</small></span>
       </a>
       <a class="btn btn--web" href="#reserve">
         <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -45,7 +45,7 @@
           <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
           <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
         </svg>
-        <span class="btn__text">Webで予約する<small>24時間受付</small></span>
+        <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
       </a>
     </div>
   </header>
@@ -188,7 +188,10 @@
           <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
           </svg>
-          <span class="btn__text">電話で予約・相談する<small>受付 10:00〜21:00</small></span>
+          <span class="btn__text">
+            <span class="btn__label">お電話でご予約・ご相談</span>
+            <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
+          </span>
         </a>
         <a class="btn btn--web" href="#reserve">
           <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -197,29 +200,37 @@
             <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
             <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
           </svg>
-          <span class="btn__text">Webで予約する<small>24時間受付</small></span>
+          <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- 固定バー（〜1079px） -->
+  <!-- 固定バー（〜1079px）。パターンB：電話番号を見せる -->
   <nav class="fixed-bar" aria-label="予約">
-    <a class="btn btn--tel" href="tel:0820000000">
-      <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-      </svg>
-      <span class="btn__text">電話で予約・相談する<small>受付 10:00〜21:00</small></span>
-    </a>
-    <a class="btn btn--web" href="#reserve">
-      <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
-        <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
-        <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
-        <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
-      </svg>
-      <span class="btn__text">Webで予約する<small>24時間受付</small></span>
-    </a>
+    <div class="fixed-bar__inner">
+      <a class="btn btn--tel" href="tel:0820000000">
+        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
+        </svg>
+        <span class="btn__text">
+          <span class="btn__label">お電話でご予約・ご相談</span>
+          <small class="btn__note--number">
+            <span class="btn__note-full">082-000-0000（受付 10:00〜21:00）</span>
+            <span class="btn__note-short">082-000-0000（10〜21時）</span>
+          </small>
+        </span>
+      </a>
+      <a class="btn btn--web" href="#reserve">
+        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
+          <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
+          <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
+          <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
+        </svg>
+        <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
+      </a>
+    </div>
   </nav>
 
   <script>
