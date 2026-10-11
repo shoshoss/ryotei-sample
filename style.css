@@ -1,0 +1,1774 @@
+/* ==========================================================
+   料亭 川音 LP — スマホ版（〜767px）ファーストビュー・固定バー
+   値の出典: DESIGN.md
+   ========================================================== */
+
+:root {
+  /* 色（DESIGN.md §2） */
+  --color-base: #F3F2ED;
+  --color-stone: #DCDDDD;
+  --color-surface: #FFFFFF;
+  --color-ink: #211815;
+  --color-dusk: #474342;
+  --color-muted: #5E5754;
+  --color-line: #C9C6BF;
+  --color-ai: #2E5A78;
+  --color-ai-hover: #274C66;
+  --color-on-dark: #E6E3DC;
+
+  /* 余白（DESIGN.md §4） */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+  --space-5: 72px; /* スマホのセクション間 */
+  --space-6: 128px; /* PCのセクション間 */
+
+  /* コンテンツ幅（DESIGN.md §4）。左右の余白。画面いっぱいに広げるのはファーストビューの写真だけ */
+  --content-pad: 20px;
+  --content-max: 1120px;
+
+  --font-mincho: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
+  --font-gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif;
+
+  --band-height: 31px; /* サンプル表記の帯（スマホは1行） */
+  --bar-height: 81px; /* 固定バー（〜1079px）の目安。ボタン64px＋上下の余白8px×2＋上辺の罫線1px（safe-areaは別途加算） */
+  --header-height: 64px; /* 固定ヘッダー（1080px〜） */
+  --fv-peek: 30px; /* 写真の下に、明るいエリアをのぞかせる高さ */
+  --fv-photo-min: 470px; /* キャッチとサブコピーが重ならない、写真の最低の高さ（実測: キャッチ下端290px＋サブコピー163px＋余白17px） */
+  --menu-panel-width: 380px; /* タブレットのメニューパネルの幅 */
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+  /* 固定バーの高さ分、最下部に余白（DESIGN.md §5） */
+  padding-bottom: calc(var(--bar-height) + env(safe-area-inset-bottom, 0px));
+}
+
+/* メニューを開いている間は、背景のスクロールを止める */
+html.is-locked,
+html.is-locked body {
+  overflow: hidden;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- サンプル表記（上部の帯） ----------
+   スマホ（〜767px）は1行に収まる短い文、768px〜はCONTENT.mdの全文を表示する */
+.sample-band {
+  margin: 0;
+  min-height: var(--band-height);
+  padding: 6px var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sample-band__short {
+  font-size: 12px; /* 13px未満だが、11px未満にはしない */
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.sample-band__full {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sample-band__short {
+    display: none;
+  }
+
+  .sample-band__full {
+    display: inline;
+    font-size: 13px;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+    white-space: normal;
+  }
+}
+
+/* ---------- ファーストビュー ----------
+   最初の画面には写真だけを見せる。信頼の要素と価格は、そのすぐ下に続き、
+   スクロールして見る（1画面に収める制約はない） */
+.hero__photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-dusk);
+  /* 画面の高さ − 帯 − 固定バー − 30px（次のエリアを少しのぞかせる） */
+  height: calc(100vh - var(--band-height) - var(--bar-height) - var(--fv-peek));
+  height: calc(100svh - var(--band-height) - var(--bar-height) - var(--fv-peek));
+  /* 下限は、キャッチとサブコピーが重ならない最低の高さ（実測） */
+  min-height: var(--fv-photo-min);
+}
+
+/* 写真の上側全体に、上から下へ薄くなる暗い層（最大0.4）。ロゴとキャッチを読みやすくする */
+.hero__photo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  z-index: 0;
+  background: linear-gradient(to bottom, rgba(33, 24, 21, 0.4) 0%, rgba(33, 24, 21, 0) 100%);
+  pointer-events: none;
+}
+
+.hero__photo picture,
+.hero__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__photo img {
+  object-fit: cover;
+  object-position: 40% 30%; /* スマホ用の写真。川の景色が見える位置 */
+}
+
+/* ロゴとメニューボタン（写真の上） */
+.hero__head {
+  position: absolute;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-2) 0 var(--space-2);
+  min-height: 64px;
+  z-index: 1;
+  color: #FFFFFF;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  text-decoration: none;
+  color: #FFFFFF;
+  letter-spacing: 0.15em;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+}
+
+.logo__small {
+  font-size: 14px;
+}
+
+.logo__large {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.menu-button {
+  width: 48px;
+  height: 48px;
+  margin-right: -12px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+/* 固定ヘッダー（PC・1080px〜のみ表示） */
+.site-header {
+  display: none;
+}
+
+/* 縦書きのキャッチコピー（写真の上部、川の上の暗い夜空）。折り返さず2列を保つ */
+.hero__copy {
+  position: absolute;
+  top: 88px;
+  left: var(--space-2);
+  margin: 0;
+  z-index: 1;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.6;
+  letter-spacing: 0.2em;
+  color: #FFFFFF;
+  animation: hero-in 1.2s ease-out both;
+}
+
+/* 各行の左に細い縦線（DESIGN.md §5） */
+.hero__line {
+  display: block;
+  position: relative;
+  padding-left: 16px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+.hero__line + .hero__line {
+  margin-left: 0;
+}
+
+.hero__line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--color-on-dark);
+}
+
+/* サブコピー（写真の下部）：キャッチとは重ならない範囲に置き、
+   下に向かって徐々に暗くなる層でコントラストを確保する */
+.hero__sub {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 48px var(--space-2) var(--space-3);
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(33, 24, 21, 0) 0%,
+    rgba(33, 24, 21, 0.75) 35%,
+    rgba(33, 24, 21, 0.75) 100%
+  );
+  color: var(--color-on-dark);
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.1em;
+}
+
+/* 明るいエリア（信頼の要素・価格）。写真のすぐ下に続く通常のセクション */
+.hero__info {
+  padding: var(--space-3) var(--space-2) var(--space-4);
+  background: var(--color-base);
+}
+
+/* 信頼の要素（3列・縦罫線で区切る） */
+.trust {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  padding: var(--space-3) 0;
+  list-style: none;
+}
+
+.trust__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0 4px;
+  text-align: center;
+}
+
+.trust__item + .trust__item {
+  border-left: 1px solid var(--color-line);
+}
+
+.trust__icon {
+  color: var(--color-ink);
+}
+
+.trust__text {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+}
+
+/* 価格の一言（上下を罫線で挟む） */
+.price-line {
+  margin: 0;
+  padding: var(--space-2) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 var(--space-1);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  text-align: center;
+}
+
+.price-line__course {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.price-line__price {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+
+.price-line__note {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- セクション見出し（DESIGN.md §5「セクション見出し」） ----------
+   「選ばれる理由」以降、すべてのセクション見出しで共通に使う */
+.section-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+  color: var(--color-ink);
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 24px;
+  margin: var(--space-2) auto 0;
+  background: var(--color-ink);
+}
+
+/* ---------- 選ばれる理由 ----------
+   写真(3:2) → 小見出し(h3) → 本文の順で縦に積む。本文は左揃え。
+   ファーストビューの明るいエリアと同じ背景色で、自然に続けて見せる */
+.reasons {
+  background: var(--color-base);
+  /* 左右はコンテンツ幅の余白（DESIGN.md §4）。画面いっぱいに広げるのはファーストビューの写真だけ */
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.reasons__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.reason__photo {
+  display: block;
+  width: 100%;
+  height: auto; /* これがないと height 属性の値が優先され、aspect-ratio が効かない */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin: 0 0 var(--space-3);
+}
+
+.reason__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.reason__body {
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+/* CTAブロックの一言（スマホ・タブレットはボタンを固定バーで代用し、一言だけを置く） */
+.cta-line {
+  margin: var(--space-4) 0 0;
+  text-align: center;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+/* タブレット：理由のまとまりの幅を抑えて中央に置く（写真が大きくなりすぎないように） */
+@media (min-width: 768px) {
+  .reasons__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- ご利用シーン ---------- */
+.scenes {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+/* 短いリード文は中央揃え（DESIGN.md §3） */
+.scenes__lead {
+  max-width: 30em;
+  margin: var(--space-2) auto 0;
+  text-align: center;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.scenes__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.scene__photo {
+  display: block;
+  width: 100%;
+  height: auto; /* height属性より先にこれがないと aspect-ratio が効かない */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin: 0 0 var(--space-3);
+}
+
+.scene__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.scene__info {
+  margin: 0 0 var(--space-3);
+}
+
+.scene__row {
+  display: flex;
+  gap: var(--space-2);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.scene__row:first-child {
+  border-top: 1px solid var(--color-line);
+}
+
+.scene__row dt {
+  flex: 0 0 128px; /* 「おすすめのお部屋」(8字)が1行に収まる幅 */
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.scene__row dd {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.scene__note {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* ご旅行・記念日だけ：Web予約を主役にする（背景 墨、文字 白）。
+   .btn--web とセットで使うため、詳細度を上げて確実に上書きする */
+.btn--web.btn--web-primary {
+  background: var(--color-ink);
+  color: #FFFFFF;
+  border: none;
+}
+
+@media (hover: hover) {
+  .btn--web.btn--web-primary:hover {
+    background: var(--color-ink);
+    color: #FFFFFF;
+  }
+}
+
+/* ご旅行・記念日の電話：文字のリンク（藍は使わない） */
+.scene__tel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.scene__tel-link .btn__label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* タブレット：カード1枚ずつの幅を抑えて中央に置く（「選ばれる理由」と同じ考え方） */
+@media (min-width: 768px) {
+  .scene {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- お部屋 ----------
+   背景は石灰（区切りのセクション。DESIGN.md §2）。写真(3:2)→部屋名→定員／室料／向いているご利用の順 */
+.rooms {
+  background: var(--color-stone);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.rooms__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.room__photo {
+  display: block;
+  width: 100%;
+  height: auto; /* height属性より先にこれがないと aspect-ratio が効かない */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin: 0 0 var(--space-3);
+}
+
+.room__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.room__info {
+  margin: 0;
+}
+
+.room__row {
+  display: flex;
+  gap: var(--space-2);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.room__row:first-child {
+  border-top: 1px solid var(--color-line);
+}
+
+.room__row dt {
+  flex: 0 0 128px;
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.room__row dd {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+/* タブレット：部屋1枚ずつの幅を抑えて中央に置く */
+@media (min-width: 768px) {
+  .room {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- 料金・総額の目安 ---------- */
+.price {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+/* 料金表：背景 白、上下に罫線のみ（DESIGN.md「料金表」） */
+.price-table {
+  margin-top: var(--space-4);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.price-table__row {
+  padding: var(--space-3) var(--space-2);
+}
+
+.price-table__row + .price-table__row {
+  border-top: 1px solid var(--color-line);
+}
+
+.price-table__name {
+  margin: 0 0 var(--space-1);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.price-table__desc {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.price-table__price {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--space-1);
+}
+
+.price-table__amount {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.price-table__tax {
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.price-table__note {
+  margin: var(--space-2) 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* 総額の目安（料金表の直後） */
+.estimates__title {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+  color: var(--color-ink);
+}
+
+.estimates__title::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 24px;
+  margin: var(--space-2) auto 0;
+  background: var(--color-ink);
+}
+
+.estimates__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+/* 計算例1件分：背景 白（DESIGN.md「総額の計算例」） */
+.estimate {
+  background: var(--color-surface);
+  padding: var(--space-3) var(--space-2) 0;
+}
+
+.estimate__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.estimate__block {
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.estimate__label {
+  margin: 0 0 4px;
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.estimate__value {
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.estimate__detail {
+  margin: 0;
+}
+
+.estimate__detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px 0;
+}
+
+.estimate__detail-row dt {
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.estimate__detail-row dd {
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+  text-align: right;
+}
+
+.estimate__total {
+  margin: 0;
+  text-align: right;
+  font-family: var(--font-gothic);
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+/* お一人様あたり：生成りの面に中央揃え。最も大きく見せる */
+.estimate__per-person {
+  margin: var(--space-3) calc(var(--space-2) * -1) 0;
+  padding: var(--space-3) var(--space-2);
+  background: var(--color-base);
+  text-align: center;
+}
+
+.estimate__per-person-label {
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.estimate__per-person-amount {
+  margin: 4px 0 0;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.estimate__per-person-note {
+  margin: 2px 0 0;
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* タブレット：料金表・計算例の幅を抑えて中央に置く（他のセクションと同じ考え方） */
+@media (min-width: 768px) {
+  .price-table,
+  .estimates__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- 料理長と店の歩み ----------
+   暗いセクション背景（DESIGN.md §2「--color-dusk」）。予約ボタンは置かない。藍も使わない */
+.chef {
+  background: var(--color-dusk);
+  color: var(--color-on-dark);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+/* 暗い背景の上では、見出しの文字と線を on-dark にする */
+.chef .section-title {
+  color: var(--color-on-dark);
+}
+
+.chef .section-title::after {
+  background: var(--color-on-dark);
+}
+
+.chef__photo {
+  display: block;
+  width: 100%;
+  height: auto; /* height属性より先にこれがないと aspect-ratio が効かない */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin: var(--space-4) 0 var(--space-3);
+}
+
+.chef__body {
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: var(--color-on-dark);
+}
+
+/* タブレット：写真・本文の幅を抑えて中央に置く（他のセクションと同じ考え方） */
+@media (min-width: 768px) {
+  .chef__inner {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- 幹事様向けサポート ----------
+   DESIGN.md に専用の項目がないため、既存の罫線区切りの一覧（お部屋・ご利用シーンと同じ考え方）を使う */
+.support {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.support__list {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-line);
+}
+
+.support__list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-line);
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .support__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- ご予約の流れ ---------- */
+.flow {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.flow__group {
+  margin-top: var(--space-4);
+}
+
+.flow__group-title {
+  margin: 0 0 var(--space-3);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.flow__steps {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 丸同士をつなぐ縦線。丸の後ろを通す */
+.flow__steps::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 13.5px;
+  width: 1px;
+  background: var(--color-line);
+}
+
+.flow__step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+}
+
+.flow__step:last-child {
+  padding-bottom: 0;
+}
+
+.flow__number {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: #FFFFFF;
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.flow__text {
+  margin: 4px 0 0;
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .flow__group {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- 予約フォーム ---------- */
+.reserve {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.reserve-form {
+  margin-top: var(--space-4);
+}
+
+.reserve-form__field {
+  margin-bottom: var(--space-3);
+}
+
+.reserve-form__label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.reserve-form__input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-ink);
+  border-radius: 2px;
+  font-family: var(--font-gothic);
+  font-size: 16px; /* 16px未満だとiPhoneで入力時に画面が拡大される */
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.reserve-form__textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.reserve-form__submit {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  margin-top: var(--space-4);
+  padding: 8px var(--space-2);
+  background: var(--color-ink);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.reserve-form__note {
+  margin: var(--space-2) 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+
+/* 送信を押したら、この注記（送信されない旨）を強調する */
+.reserve-form__note--confirm.is-shown {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .reserve-form {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- よくある質問 ----------
+   罫線で区切ったアコーディオン。カード枠・影は使わない（DESIGN.md「よくある質問」） */
+.faq {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.faq__list {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.faq__question {
+  margin: 0;
+}
+
+.faq__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 48px;
+  padding: 16px 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-ink);
+}
+
+.faq__q-mark {
+  flex: none;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.04em;
+}
+
+.faq__q-text {
+  flex: 1 1 auto;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+}
+
+.faq__chevron {
+  flex: none;
+  transition: transform 0.2s;
+}
+
+.faq__trigger[aria-expanded="true"] .faq__chevron {
+  transform: rotate(180deg);
+}
+
+.faq__answer {
+  padding: 0 0 var(--space-3);
+}
+
+.faq__answer-text {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.faq__a-mark {
+  flex: none;
+  width: 19px;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 768px) {
+  .faq__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- アクセス ----------
+   区切りのセクション背景は石灰（DESIGN.md §2） */
+
+.access {
+  background: var(--color-stone);
+  padding-top: var(--space-5);
+}
+
+.access__info {
+  margin-top: var(--space-4);
+  padding: 0 var(--content-pad);
+}
+
+.access__list {
+  margin: 0;
+}
+
+.access__row {
+  display: flex;
+  gap: var(--space-2);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.access__row:first-child {
+  border-top: 1px solid var(--color-line);
+}
+
+.access__row dt {
+  flex: 0 0 88px;
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.access__row dd {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+/* スマホ・タブレットの最後の予約導線は固定バーに集約する。 */
+@media (max-width: 1079px) {
+  .access {
+    padding-bottom: var(--space-5);
+  }
+}
+
+@media (min-width: 768px) {
+  .access__info {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- フッター ----------
+   サンプル表記の帯と同じ配色（DESIGN.md「サンプル表記」） */
+.site-footer {
+  padding: var(--space-4) var(--content-pad);
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  text-align: center;
+}
+
+.site-footer__name {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.1em;
+}
+
+.site-footer__sample {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- ボタン（電話・Web予約） ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 56px;
+  padding: 8px var(--space-2);
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn small {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.btn__note--number {
+  font-variant-numeric: tabular-nums;
+}
+
+.btn__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ボタンの主なラベルは明朝体、補足（small）はゴシック体のまま（DESIGN.md §3） */
+.btn__label {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+}
+
+.btn--tel {
+  background: var(--color-ai);
+  color: #FFFFFF;
+}
+
+/* Web予約：白地・墨の枠線 */
+.btn--web {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+}
+
+/* ホバーできる環境だけ、ホバーで色を変える（タッチ端末でのホバー固着を避ける）。
+   キーボード操作のフォーカス時は、環境によらず同じ見た目にする */
+@media (hover: hover) {
+  .btn--tel:hover {
+    background: var(--color-ai-hover);
+  }
+
+  .btn--web:hover {
+    background: var(--color-ink);
+    color: #FFFFFF;
+  }
+}
+
+.btn--tel:focus-visible {
+  background: var(--color-ai-hover);
+}
+
+.btn--web:focus-visible {
+  background: var(--color-ink);
+  color: #FFFFFF;
+}
+
+.btn__icon {
+  flex: none;
+}
+
+/* ---------- 固定バー（〜1079px） ----------
+   パターンB（bar-test.html で比較し決定）。生成り背景・上辺の罫線のみ・影なし。
+   中身は最大640px・中央寄せ。
+   高さは固定値にしない。ボタンの上下の余白を8px均等にし、iPhoneの画面下の余白
+   （env(safe-area-inset-bottom)）だけを下に足す。余白のない画面では上下が均等に見える */
+.fixed-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 8px var(--content-pad) calc(8px + env(safe-area-inset-bottom, 0px));
+  background: var(--color-base);
+  border-top: 1px solid var(--color-line);
+  box-shadow: none;
+}
+
+.fixed-bar__inner {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fixed-bar .btn {
+  min-width: 0;
+  min-height: 64px; /* バーの高さの目安：ボタン64px程度＋余白8px×2＋safe-area */
+  padding: 8px 6px;
+  gap: 6px;
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.fixed-bar .btn__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.fixed-bar .btn--tel {
+  flex: 0 0 60%;
+}
+
+.fixed-bar .btn--web {
+  flex: 1 1 auto;
+}
+
+/* 768px〜：アイコン＋従来の文言（今のまま） */
+.fixed-bar .btn__desktop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fixed-bar .btn__mobile {
+  display: none;
+}
+
+/* 〜767px：アイコンを外し、2行以内に収まる短い文言に差し替える */
+@media (max-width: 767px) {
+  .fixed-bar .btn__desktop {
+    display: none;
+  }
+
+  .fixed-bar .btn__mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* 「082-000-0000・10〜21時」が1行に収まるか実測のうえ決定（375px幅で確認） */
+  .btn__note-mobile-short {
+    display: none;
+  }
+}
+
+/* ---------- メニュー（タブレット・スマホ） ----------
+   .menu は外側の層（スマホは見えない。タブレットは半透明の暗い層）。
+   .menu__panel が中身で、スマホは全画面、タブレットは右からスライドする幅380pxのパネル。
+   開閉は透明度だけで変える（DESIGN.md §5 の「浮き上がる動き」は使わない）。
+   閉じるときは、フェードが終わってから見えなくする */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.menu__panel {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--color-base);
+  padding: env(safe-area-inset-top, 0px) var(--space-2) env(safe-area-inset-bottom, 0px);
+}
+
+.menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+.menu__title {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+}
+
+.menu__close {
+  width: 48px;
+  height: 48px;
+  margin-right: -12px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.menu__list {
+  margin: var(--space-3) 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-line);
+}
+
+.menu__list li {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.menu__list a {
+  display: block;
+  position: relative;
+  padding: 16px 0;
+  font-family: var(--font-mincho);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.menu__cta {
+  display: grid;
+  gap: var(--space-2);
+  padding-bottom: var(--space-3);
+}
+
+/* 文字の下に、左から伸びる1pxの線（ホバー・フォーカス共通）。
+   widthではなくtransform: scaleXで伸ばす（inline-blockの子要素でも確実に効くため） */
+.menu__list a::after,
+.site-nav__list a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s;
+}
+
+.site-nav__list a::after {
+  bottom: -6px;
+}
+
+@media (hover: hover) {
+  .menu__list a:hover::after,
+  .site-nav__list a:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.menu__list a:focus-visible::after,
+.site-nav__list a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---------- タブレット（768〜1079px）：右からスライドするパネル＋半透明の層 ---------- */
+@media (min-width: 768px) and (max-width: 1079px) {
+  .menu.is-open {
+    background: rgba(33, 24, 21, 0.5);
+  }
+
+  .menu__panel {
+    left: auto;
+    width: var(--menu-panel-width);
+    border-left: 1px solid var(--color-line);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .menu.is-open .menu__panel {
+    transform: translateX(0);
+  }
+}
+
+/* ---------- 768px〜：PC用の写真（横長）を使う ---------- */
+@media (min-width: 768px) {
+  :root {
+    --band-height: 38px; /* 帯は1行 */
+  }
+
+  .hero__photo img {
+    object-position: 15% 50%; /* PC用の写真。川の景色が見える位置 */
+  }
+}
+
+/* ---------- PC（1080px〜）：固定ヘッダーに切り替え、固定バー・三本線メニューは使わない ---------- */
+@media (min-width: 1080px) {
+  :root {
+    --content-pad: 40px; /* PCの左右の余白（DESIGN.md §4） */
+  }
+
+  .fixed-bar,
+  .menu-button,
+  .menu,
+  .hero__head {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 0;
+    /* 固定ヘッダーの高さ分、ページ先頭に余白を確保する */
+    padding-top: var(--header-height);
+  }
+
+  /* 固定バーの代わりに、固定ヘッダーの高さを引く */
+  .hero__photo {
+    height: calc(100vh - var(--band-height) - var(--header-height) - var(--fv-peek));
+    height: calc(100svh - var(--band-height) - var(--header-height) - var(--fv-peek));
+  }
+
+  /* ページ内リンクで移動したとき、見出しが固定ヘッダーに隠れないようにする */
+  #reasons,
+  #scenes,
+  #rooms,
+  #price,
+  #support,
+  #flow,
+  #reserve,
+  #faq {
+    scroll-margin-top: var(--header-height);
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    height: var(--header-height);
+    padding-inline: max(40px, calc((100% - 1120px) / 2));
+    background: var(--color-ink);
+    color: #FFFFFF;
+  }
+
+  .site-header .logo {
+    flex: none;
+  }
+
+  .site-nav {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .site-nav__list {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav__list a {
+    position: relative;
+    display: inline-block; /* ::afterのwidth:100%を文字幅に対して解決させるため */
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: var(--font-mincho);
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .site-header__actions {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .header-tel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+
+  .header-tel__text {
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-tel__text small {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--color-on-dark);
+  }
+
+  .site-header .btn--web {
+    min-height: 48px;
+    padding: 8px 20px;
+  }
+}
+
+/* ヘッダーの電話番号にも、同じ下線のホバー・フォーカスを付ける */
+@media (min-width: 1080px) {
+  .header-tel {
+    position: relative;
+  }
+
+  .header-tel::after {
+    content: "";
+    position: absolute;
+    left: 28px;
+    right: 0;
+    bottom: -6px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s;
+  }
+}
+
+@media (min-width: 1080px) and (hover: hover) {
+  .header-tel:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 1080px) {
+  .header-tel:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- 動きを減らす設定 ---------- */
+@keyframes hero-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
