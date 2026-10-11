@@ -21,6 +21,12 @@
   --space-2: 16px;
   --space-3: 24px;
   --space-4: 40px;
+  --space-5: 72px; /* スマホのセクション間 */
+  --space-6: 128px; /* PCのセクション間 */
+
+  /* コンテンツ幅（DESIGN.md §4）。左右の余白。画面いっぱいに広げるのはファーストビューの写真だけ */
+  --content-pad: 20px;
+  --content-max: 1120px;
 
   --font-mincho: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", serif;
   --font-gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif;
@@ -380,7 +386,8 @@ a {
    ファーストビューの明るいエリアと同じ背景色で、自然に続けて見せる */
 .reasons {
   background: var(--color-base);
-  padding: var(--space-5) var(--space-2) var(--space-4);
+  /* 左右はコンテンツ幅の余白（DESIGN.md §4）。画面いっぱいに広げるのはファーストビューの写真だけ */
+  padding: var(--space-5) var(--content-pad) var(--space-4);
 }
 
 .reasons__list {
@@ -697,6 +704,10 @@ a {
 
 /* ---------- PC（1080px〜）：固定ヘッダーに切り替え、固定バー・三本線メニューは使わない ---------- */
 @media (min-width: 1080px) {
+  :root {
+    --content-pad: 40px; /* PCの左右の余白（DESIGN.md §4） */
+  }
+
   .fixed-bar,
   .menu-button,
   .menu,
