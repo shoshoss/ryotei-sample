@@ -12,8 +12,8 @@
   --color-dusk: #474342;
   --color-muted: #5E5754;
   --color-line: #C9C6BF;
-  --color-ai: #1F3B4D;
-  --color-ai-hover: #1A3241;
+  --color-ai: #2E5A78;
+  --color-ai-hover: #274C66;
   --color-on-dark: #E6E3DC;
 
   /* 余白（DESIGN.md §4） */
@@ -32,7 +32,7 @@
   --font-gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif;
 
   --band-height: 31px; /* サンプル表記の帯（スマホは1行） */
-  --bar-height: 120px; /* 固定バー（〜1079px）。375px幅で電話ボタンが2行×2（ラベル・補足）になる分を含めた実測値 */
+  --bar-height: 80px; /* 固定バー（〜1079px）の目安。ボタン64px＋上下の余白8px×2（safe-areaは別途加算） */
   --header-height: 64px; /* 固定ヘッダー（1080px〜） */
   --fv-peek: 30px; /* 写真の下に、明るいエリアをのぞかせる高さ */
   --fv-photo-min: 470px; /* キャッチとサブコピーが重ならない、写真の最低の高さ（実測: キャッチ下端290px＋サブコピー163px＋余白17px） */
@@ -526,14 +526,15 @@ a {
 
 /* ---------- 固定バー（〜1079px） ----------
    パターンB（bar-test.html で比較し決定）。生成り背景・上辺の罫線のみ・影なし。
-   中身は最大640px・中央寄せ。電話ボタンに番号を見せるため、2行になることを許容する */
+   中身は最大640px・中央寄せ。
+   高さは固定値にしない。ボタンの上下の余白を8px均等にし、iPhoneの画面下の余白
+   （env(safe-area-inset-bottom)）だけを下に足す。余白のない画面では上下が均等に見える */
 .fixed-bar {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 10;
-  min-height: calc(var(--bar-height) + env(safe-area-inset-bottom, 0px));
   padding: 8px var(--content-pad) calc(8px + env(safe-area-inset-bottom, 0px));
   background: var(--color-base);
   border-top: 1px solid var(--color-line);
@@ -550,6 +551,7 @@ a {
 
 .fixed-bar .btn {
   min-width: 0;
+  min-height: 64px; /* バーの高さの目安：ボタン64px程度＋余白8px×2＋safe-area */
   padding: 8px 6px;
   gap: 6px;
   font-size: 15px;
@@ -569,18 +571,33 @@ a {
   flex: 1 1 auto;
 }
 
-/* 電話番号の補足：375px幅では全文が2行になるため、スマホ（〜767px）だけ短縮表記にする */
-.fixed-bar .btn__note-short {
+/* 768px〜：アイコン＋従来の文言（今のまま） */
+.fixed-bar .btn__desktop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fixed-bar .btn__mobile {
   display: none;
 }
 
+/* 〜767px：アイコンを外し、2行以内に収まる短い文言に差し替える */
 @media (max-width: 767px) {
-  .fixed-bar .btn__note-full {
+  .fixed-bar .btn__desktop {
     display: none;
   }
 
-  .fixed-bar .btn__note-short {
-    display: inline;
+  .fixed-bar .btn__mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* 「082-000-0000・10〜21時」が1行に収まるか実測のうえ決定（375px幅で確認） */
+  .btn__note-mobile-short {
+    display: none;
   }
 }
 
