@@ -651,6 +651,233 @@ a {
   }
 }
 
+/* ---------- 料金・総額の目安 ---------- */
+.price {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+/* 料金表：背景 白、上下に罫線のみ（DESIGN.md「料金表」） */
+.price-table {
+  margin-top: var(--space-4);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.price-table__row {
+  padding: var(--space-3) var(--space-2);
+}
+
+.price-table__row + .price-table__row {
+  border-top: 1px solid var(--color-line);
+}
+
+.price-table__name {
+  margin: 0 0 var(--space-1);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.price-table__desc {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.price-table__price {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--space-1);
+}
+
+.price-table__amount {
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.price-table__tax {
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.price-table__note {
+  margin: var(--space-2) 0 0;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* 総額の目安（料金表の直後） */
+.estimates__title {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+  color: var(--color-ink);
+}
+
+.estimates__title::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 24px;
+  margin: var(--space-2) auto 0;
+  background: var(--color-ink);
+}
+
+.estimates__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+/* 計算例1件分：背景 白（DESIGN.md「総額の計算例」） */
+.estimate {
+  background: var(--color-surface);
+  padding: var(--space-3) var(--space-2) 0;
+}
+
+.estimate__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.estimate__block {
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.estimate__label {
+  margin: 0 0 4px;
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.estimate__value {
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.estimate__detail {
+  margin: 0;
+}
+
+.estimate__detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px 0;
+}
+
+.estimate__detail-row dt {
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.estimate__detail-row dd {
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+  text-align: right;
+}
+
+.estimate__total {
+  margin: 0;
+  text-align: right;
+  font-family: var(--font-gothic);
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+/* お一人様あたり：生成りの面に中央揃え。最も大きく見せる */
+.estimate__per-person {
+  margin: var(--space-3) calc(var(--space-2) * -1) 0;
+  padding: var(--space-3) var(--space-2);
+  background: var(--color-base);
+  text-align: center;
+}
+
+.estimate__per-person-label {
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.estimate__per-person-amount {
+  margin: 4px 0 0;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.estimate__per-person-note {
+  margin: 2px 0 0;
+  font-family: var(--font-gothic);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* タブレット：料金表・計算例の幅を抑えて中央に置く（他のセクションと同じ考え方） */
+@media (min-width: 768px) {
+  .price-table,
+  .estimates__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ---------- ボタン（電話・Web予約） ---------- */
 .btn {
   display: flex;
@@ -979,7 +1206,8 @@ a {
   /* ページ内リンクで移動したとき、見出しが固定ヘッダーに隠れないようにする */
   #reasons,
   #scenes,
-  #rooms {
+  #rooms,
+  #price {
     scroll-margin-top: var(--header-height);
   }
 
