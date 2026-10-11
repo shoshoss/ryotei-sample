@@ -1,453 +1,917 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>料亭 川音</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, viewport-fit=cover"
+		/>
+		<title>料亭 川音</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap"
+		/>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<!-- サンプル表記（上部の帯）。スマホ（〜767px）は短い1行、768px〜はCONTENT.mdの全文 -->
+		<p class="sample-band">
+			<span class="sample-band__short"
+				>制作サンプルです。店舗・料金・電話番号は架空です。</span
+			>
+			<span class="sample-band__full"
+				>本サイトはWeb制作のサンプルです。掲載の店舗・電話番号・料金はすべて架空のものです。</span
+			>
+		</p>
 
-  <!-- サンプル表記（上部の帯）。スマホ（〜767px）は短い1行、768px〜はCONTENT.mdの全文 -->
-  <p class="sample-band">
-    <span class="sample-band__short">制作サンプルです。店舗・料金・電話番号は架空です。</span>
-    <span class="sample-band__full">本サイトはWeb制作のサンプルです。掲載の店舗・電話番号・料金はすべて架空のものです。</span>
-  </p>
+		<!-- 固定ヘッダー（PC・1080px〜のみ表示。references/kawaoto_pc_01_fv_v1.png に合わせる） -->
+		<header class="site-header">
+			<a class="logo" href="#top" aria-label="料亭 川音">
+				<span class="logo__small">料亭</span
+				><span class="logo__large">川音</span>
+			</a>
+			<nav class="site-nav" aria-label="ページ内メニュー">
+				<ul class="site-nav__list">
+					<li><a href="#reasons">選ばれる理由</a></li>
+					<li><a href="#scenes">ご利用シーン</a></li>
+					<li><a href="#rooms">お部屋</a></li>
+					<li><a href="#price">料金</a></li>
+					<li><a href="#access">アクセス</a></li>
+				</ul>
+			</nav>
+			<div class="site-header__actions">
+				<a class="header-tel" href="tel:0820000000">
+					<svg
+						class="header-tel__icon"
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path
+							d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+						/>
+					</svg>
+					<span class="header-tel__text"
+						><span class="btn__label">082-000-0000</span
+						><small>受付 10:00〜21:00</small></span
+					>
+				</a>
+				<a class="btn btn--web" href="#reserve">
+					<svg
+						class="btn__icon"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<rect x="3.5" y="5" width="17" height="15" rx="1.5" />
+						<path d="M3.5 9.5h17M8 3v4M16 3v4" />
+						<circle cx="8" cy="13" r="0.6" />
+						<circle cx="12" cy="13" r="0.6" />
+						<circle cx="16" cy="13" r="0.6" />
+						<circle cx="8" cy="16.5" r="0.6" />
+						<circle cx="12" cy="16.5" r="0.6" />
+					</svg>
+					<span class="btn__text"
+						><span class="btn__label">Webで予約する</span
+						><small>24時間受付</small></span
+					>
+				</a>
+			</div>
+		</header>
 
-  <!-- 固定ヘッダー（PC・1080px〜のみ表示。references/kawaoto_pc_01_fv_v1.png に合わせる） -->
-  <header class="site-header">
-    <a class="logo" href="#top" aria-label="料亭 川音">
-      <span class="logo__small">料亭</span><span class="logo__large">川音</span>
-    </a>
-    <nav class="site-nav" aria-label="ページ内メニュー">
-      <ul class="site-nav__list">
-        <li><a href="#reasons">選ばれる理由</a></li>
-        <li><a href="#scenes">ご利用シーン</a></li>
-        <li><a href="#rooms">お部屋</a></li>
-        <li><a href="#price">料金</a></li>
-        <li><a href="#access">アクセス</a></li>
-      </ul>
-    </nav>
-    <div class="site-header__actions">
-      <a class="header-tel" href="tel:0820000000">
-        <svg class="header-tel__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-        </svg>
-        <span class="header-tel__text"><span class="btn__label">082-000-0000</span><small>受付 10:00〜21:00</small></span>
-      </a>
-      <a class="btn btn--web" href="#reserve">
-        <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
-          <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
-          <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
-          <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
-        </svg>
-        <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
-      </a>
-    </div>
-  </header>
+		<main>
+			<!-- ファーストビュー：写真エリア ＋ 明るいエリア -->
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="hero__photo">
+					<picture>
+						<source
+							media="(min-width: 768px)"
+							srcset="
+								images/kawaoto_01_fv_pc_1024w.webp 1024w,
+								images/kawaoto_01_fv_pc_1600w.webp 1600w
+							"
+							sizes="100vw"
+						/>
+						<source
+							srcset="
+								images/kawaoto_02_fv_sp_750w.webp   750w,
+								images/kawaoto_02_fv_sp_1080w.webp 1080w
+							"
+							sizes="100vw"
+						/>
+						<img
+							src="images/kawaoto_02_fv_sp_750w.webp"
+							width="750"
+							height="1000"
+							alt="窓の外に夜の川が見える個室"
+							fetchpriority="high"
+						/>
+					</picture>
 
-  <main>
-    <!-- ファーストビュー：写真エリア ＋ 明るいエリア -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__photo">
-        <picture>
-          <source media="(min-width: 768px)" srcset="images/kawaoto_01_fv_pc_1024w.webp 1024w, images/kawaoto_01_fv_pc_1600w.webp 1600w" sizes="100vw">
-          <source srcset="images/kawaoto_02_fv_sp_750w.webp 750w, images/kawaoto_02_fv_sp_1080w.webp 1080w" sizes="100vw">
-          <img src="images/kawaoto_02_fv_sp_750w.webp" width="750" height="1000" alt="窓の外に夜の川が見える個室" fetchpriority="high">
-        </picture>
+					<div class="hero__head">
+						<a class="logo" href="#top" aria-label="料亭 川音">
+							<span class="logo__small">料亭</span
+							><span class="logo__large">川音</span>
+						</a>
+						<button
+							class="menu-button"
+							type="button"
+							aria-expanded="false"
+							aria-controls="menu"
+							aria-label="メニュー"
+						>
+							<svg
+								width="28"
+								height="28"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								aria-hidden="true"
+							>
+								<path d="M3 7h18M3 12h18M3 17h18" />
+							</svg>
+						</button>
+					</div>
 
-        <div class="hero__head">
-          <a class="logo" href="#top" aria-label="料亭 川音">
-            <span class="logo__small">料亭</span><span class="logo__large">川音</span>
-          </a>
-          <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu" aria-label="メニュー">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-              <path d="M3 7h18M3 12h18M3 17h18"/>
-            </svg>
-          </button>
-        </div>
+					<h1 class="hero__copy" id="hero-title">
+						<span class="hero__line">話が進む、</span>
+						<span class="hero__line">静かな個室。</span>
+					</h1>
 
-        <h1 class="hero__copy" id="hero-title">
-          <span class="hero__line">話が進む、</span>
-          <span class="hero__line">静かな個室。</span>
-        </h1>
+					<p class="hero__sub">
+						川のほとりの料亭。料理長が瀬戸内の旬で仕立てる会席で、大切な席をおもてなしいたします。
+					</p>
+				</div>
 
-        <p class="hero__sub">川のほとりの料亭。料理長が瀬戸内の旬で仕立てる会席で、大切な席をおもてなしいたします。</p>
-      </div>
+				<div class="hero__info">
+					<ul class="trust">
+						<li class="trust__item">
+							<svg
+								class="trust__icon"
+								width="36"
+								height="36"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path
+									d="M2.17 12.6A12 12 0 0 1 21.83 12.6L16.1 16.63A5 5 0 0 0 7.9 16.63Z"
+								/>
+								<path
+									d="M12 14.5V7.5M9.69 15.06L6.46 8.86M14.31 15.06L17.54 8.86"
+								/>
+								<path d="M7.9 16.63L12 19.5L16.1 16.63" />
+							</svg>
+							<span class="trust__text">創業<br />昭和38年</span>
+						</li>
+						<li class="trust__item">
+							<svg
+								class="trust__icon"
+								width="36"
+								height="36"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<circle cx="12" cy="7.5" r="2.6" />
+								<path d="M7.5 18.5v-1a4.5 4.5 0 0 1 9 0v1" />
+								<circle cx="5.5" cy="9.5" r="1.9" />
+								<path d="M2.5 17.5v-.6a3 3 0 0 1 4.2-2.75" />
+								<circle cx="18.5" cy="9.5" r="1.9" />
+								<path d="M21.5 17.5v-.6a3 3 0 0 0-4.2-2.75" />
+							</svg>
+							<span class="trust__text">全室個室<br />2〜40名様</span>
+						</li>
+						<li class="trust__item">
+							<svg
+								class="trust__icon"
+								width="36"
+								height="36"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path
+									d="M5.5 12.5l1.6-3.9a1.2 1.2 0 0 1 1.1-.75h7.6a1.2 1.2 0 0 1 1.1.75l1.6 3.9"
+								/>
+								<path
+									d="M3.5 13.5a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"
+								/>
+								<path d="M6.5 18v1.5M17.5 18v1.5" />
+								<circle cx="7" cy="15.2" r="0.8" />
+								<circle cx="17" cy="15.2" r="0.8" />
+							</svg>
+							<span class="trust__text">八丁堀から<br />車で約5分</span>
+						</li>
+					</ul>
 
-      <div class="hero__info">
-        <ul class="trust">
-          <li class="trust__item">
-            <svg class="trust__icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2.17 12.6A12 12 0 0 1 21.83 12.6L16.1 16.63A5 5 0 0 0 7.9 16.63Z"/>
-              <path d="M12 14.5V7.5M9.69 15.06L6.46 8.86M14.31 15.06L17.54 8.86"/>
-              <path d="M7.9 16.63L12 19.5L16.1 16.63"/>
-            </svg>
-            <span class="trust__text">創業<br>昭和38年</span>
-          </li>
-          <li class="trust__item">
-            <svg class="trust__icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="7.5" r="2.6"/>
-              <path d="M7.5 18.5v-1a4.5 4.5 0 0 1 9 0v1"/>
-              <circle cx="5.5" cy="9.5" r="1.9"/>
-              <path d="M2.5 17.5v-.6a3 3 0 0 1 4.2-2.75"/>
-              <circle cx="18.5" cy="9.5" r="1.9"/>
-              <path d="M21.5 17.5v-.6a3 3 0 0 0-4.2-2.75"/>
-            </svg>
-            <span class="trust__text">全室個室<br>2〜40名様</span>
-          </li>
-          <li class="trust__item">
-            <svg class="trust__icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5.5 12.5l1.6-3.9a1.2 1.2 0 0 1 1.1-.75h7.6a1.2 1.2 0 0 1 1.1.75l1.6 3.9"/>
-              <path d="M3.5 13.5a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1V17a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1Z"/>
-              <path d="M6.5 18v1.5M17.5 18v1.5"/>
-              <circle cx="7" cy="15.2" r="0.8"/>
-              <circle cx="17" cy="15.2" r="0.8"/>
-            </svg>
-            <span class="trust__text">八丁堀から<br>車で約5分</span>
-          </li>
-        </ul>
+					<p class="price-line">
+						<span class="price-line__course">川音会席</span>
+						<span class="price-line__price">8,800円〜</span>
+						<span class="price-line__note">（税込）</span>
+					</p>
+				</div>
+			</section>
 
-        <p class="price-line">
-          <span class="price-line__course">川音会席</span>
-          <span class="price-line__price">8,800円〜</span>
-          <span class="price-line__note">（税込）</span>
-        </p>
-      </div>
-    </section>
+			<!-- 選ばれる理由 -->
+			<section class="reasons" id="reasons" aria-labelledby="reasons-title">
+				<h2 class="section-title" id="reasons-title">選ばれる理由</h2>
 
-    <!-- 選ばれる理由 -->
-    <section class="reasons" id="reasons" aria-labelledby="reasons-title">
-      <h2 class="section-title" id="reasons-title">選ばれる理由</h2>
+				<div class="reasons__list">
+					<article class="reason">
+						<img
+							class="reason__photo"
+							width="750"
+							height="500"
+							loading="lazy"
+							src="images/kawaoto_03_room_small_750w.webp"
+							srcset="
+								images/kawaoto_03_room_small_750w.webp   750w,
+								images/kawaoto_03_room_small_1500w.webp 1500w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="床の間のある奥の小部屋"
+						/>
+						<h3 class="reason__title">全室個室で、話に集中できる静けさ</h3>
+						<p class="reason__body">
+							すべてのお部屋が、壁と襖で仕切られた個室です。最も奥の小部屋は廊下からも離れ、少人数のご接待に向いています。
+						</p>
+					</article>
 
-      <div class="reasons__list">
-        <article class="reason">
-          <img class="reason__photo" width="750" height="500" loading="lazy"
-               src="images/kawaoto_03_room_small_750w.webp"
-               srcset="images/kawaoto_03_room_small_750w.webp 750w, images/kawaoto_03_room_small_1500w.webp 1500w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="床の間のある奥の小部屋">
-          <h3 class="reason__title">全室個室で、話に集中できる静けさ</h3>
-          <p class="reason__body">すべてのお部屋が、壁と襖で仕切られた個室です。最も奥の小部屋は廊下からも離れ、少人数のご接待に向いています。</p>
-        </article>
+					<article class="reason">
+						<img
+							class="reason__photo"
+							width="750"
+							height="500"
+							loading="lazy"
+							src="images/kawaoto_04_support_750w.webp"
+							srcset="
+								images/kawaoto_04_support_750w.webp   750w,
+								images/kawaoto_04_support_1500w.webp 1500w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="席札とお手土産をご用意する手元"
+						/>
+						<h3 class="reason__title">
+							席次やお手土産まで、段取りをお任せいただけます
+						</h3>
+						<p class="reason__body">
+							ご予約のお電話で、席次、お手土産、お帰りのお車の手配までまとめて承ります。ご予算に合わせた会席のご相談も、その場でどうぞ。
+						</p>
+					</article>
 
-        <article class="reason">
-          <img class="reason__photo" width="750" height="500" loading="lazy"
-               src="images/kawaoto_04_support_750w.webp"
-               srcset="images/kawaoto_04_support_750w.webp 750w, images/kawaoto_04_support_1500w.webp 1500w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="席札とお手土産をご用意する手元">
-          <h3 class="reason__title">席次やお手土産まで、段取りをお任せいただけます</h3>
-          <p class="reason__body">ご予約のお電話で、席次、お手土産、お帰りのお車の手配までまとめて承ります。ご予算に合わせた会席のご相談も、その場でどうぞ。</p>
-        </article>
+					<article class="reason">
+						<img
+							class="reason__photo"
+							width="750"
+							height="500"
+							loading="lazy"
+							src="images/kawaoto_05_dish_750w.webp"
+							srcset="
+								images/kawaoto_05_dish_750w.webp   750w,
+								images/kawaoto_05_dish_1500w.webp 1500w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="季節の会席料理の椀物"
+						/>
+						<h3 class="reason__title">
+							京都で修業した三代目が仕立てる、瀬戸内の旬
+						</h3>
+						<p class="reason__body">
+							京都の料亭で修業を重ねた料理長が、受け継いだ味を大切にしながら、瀬戸内の旬の魚と野菜を会席に仕立てます。
+						</p>
+					</article>
+				</div>
 
-        <article class="reason">
-          <img class="reason__photo" width="750" height="500" loading="lazy"
-               src="images/kawaoto_05_dish_750w.webp"
-               srcset="images/kawaoto_05_dish_750w.webp 750w, images/kawaoto_05_dish_1500w.webp 1500w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="季節の会席料理の椀物">
-          <h3 class="reason__title">京都で修業した三代目が仕立てる、瀬戸内の旬</h3>
-          <p class="reason__body">京都の料亭で修業を重ねた料理長が、受け継いだ味を大切にしながら、瀬戸内の旬の魚と野菜を会席に仕立てます。</p>
-        </article>
-      </div>
+				<p class="cta-line">ご予算やご人数に合わせて、お気軽にご相談ください</p>
+			</section>
 
-      <p class="cta-line">ご予算やご人数に合わせて、お気軽にご相談ください</p>
-    </section>
+			<!-- ご利用シーン -->
+			<section class="scenes" id="scenes" aria-labelledby="scenes-title">
+				<h2 class="section-title" id="scenes-title">ご利用シーン</h2>
+				<p class="scenes__lead">
+					ご予算の目安は、消費税・サービス料・室料を含めた、<br />お一人様あたりの金額です。
+				</p>
 
-    <!-- ご利用シーン -->
-    <section class="scenes" id="scenes" aria-labelledby="scenes-title">
-      <h2 class="section-title" id="scenes-title">ご利用シーン</h2>
-      <p class="scenes__lead">ご予算の目安は、消費税・サービス料・室料を含めた、お一人様あたりの金額です。</p>
+				<div class="scenes__list">
+					<!-- ご接待・ご会食（電話が主役） -->
+					<article class="scene">
+						<img
+							class="scene__photo"
+							width="1200"
+							height="900"
+							loading="lazy"
+							src="images/kawaoto_06_scene_settai_800w.webp"
+							srcset="
+								images/kawaoto_06_scene_settai_800w.webp   800w,
+								images/kawaoto_06_scene_settai_1200w.webp 1200w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="個室の卓に並んだ会席料理"
+						/>
+						<h3 class="scene__title">ご接待・ご会食</h3>
+						<dl class="scene__info">
+							<div class="scene__row">
+								<dt>人数の目安</dt>
+								<dd>2〜10名様</dd>
+							</div>
+							<div class="scene__row">
+								<dt>ご予算の目安</dt>
+								<dd>
+									お一人様 約10,500円〜19,000円
+									<span class="scene__note"
+										>4名様・小部屋・川音会席の場合。お飲み物別</span
+									>
+								</dd>
+							</div>
+							<div class="scene__row">
+								<dt>おすすめのお部屋</dt>
+								<dd>小部屋、中部屋</dd>
+							</div>
+						</dl>
+						<a class="btn btn--tel scene__cta" href="tel:0820000000">
+							<svg
+								class="btn__icon"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path
+									d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+								/>
+							</svg>
+							<span class="btn__text">
+								<span class="btn__label">お電話でご予約・ご相談</span>
+								<small class="btn__note--number"
+									>082-000-0000（受付 10:00〜21:00）</small
+								>
+							</span>
+						</a>
+					</article>
 
-      <div class="scenes__list">
-        <!-- ご接待・ご会食（電話が主役） -->
-        <article class="scene">
-          <img class="scene__photo" width="1200" height="900" loading="lazy"
-               src="images/kawaoto_06_scene_settai_800w.webp"
-               srcset="images/kawaoto_06_scene_settai_800w.webp 800w, images/kawaoto_06_scene_settai_1200w.webp 1200w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="個室の卓に並んだ会席料理">
-          <h3 class="scene__title">ご接待・ご会食</h3>
-          <dl class="scene__info">
-            <div class="scene__row">
-              <dt>人数の目安</dt>
-              <dd>2〜10名様</dd>
-            </div>
-            <div class="scene__row">
-              <dt>ご予算の目安</dt>
-              <dd>
-                お一人様 約10,500円〜19,000円
-                <span class="scene__note">4名様・小部屋・川音会席の場合。お飲み物別</span>
-              </dd>
-            </div>
-            <div class="scene__row">
-              <dt>おすすめのお部屋</dt>
-              <dd>小部屋、中部屋</dd>
-            </div>
-          </dl>
-          <a class="btn btn--tel scene__cta" href="tel:0820000000">
-            <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-            </svg>
-            <span class="btn__text">
-              <span class="btn__label">お電話でご予約・ご相談</span>
-              <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
-            </span>
-          </a>
-        </article>
+					<!-- ご宴会（電話が主役） -->
+					<article class="scene">
+						<img
+							class="scene__photo"
+							width="1200"
+							height="900"
+							loading="lazy"
+							src="images/kawaoto_07_scene_enkai_800w.webp"
+							srcset="
+								images/kawaoto_07_scene_enkai_800w.webp   800w,
+								images/kawaoto_07_scene_enkai_1200w.webp 1200w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="宴席の膳が整えられた大広間"
+						/>
+						<h3 class="scene__title">ご宴会（歓迎会・送別会など）</h3>
+						<dl class="scene__info">
+							<div class="scene__row">
+								<dt>人数の目安</dt>
+								<dd>10〜40名様</dd>
+							</div>
+							<div class="scene__row">
+								<dt>ご予算の目安</dt>
+								<dd>
+									お一人様 約13,000円〜13,300円
+									<span class="scene__note"
+										>宴席プラン（飲み放題2時間付き）の場合。10名様は中部屋、20〜40名様は大広間</span
+									>
+								</dd>
+							</div>
+							<div class="scene__row">
+								<dt>おすすめのお部屋</dt>
+								<dd>大広間（20名様前後は襖で仕切った半室も可）</dd>
+							</div>
+						</dl>
+						<a class="btn btn--tel scene__cta" href="tel:0820000000">
+							<svg
+								class="btn__icon"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path
+									d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+								/>
+							</svg>
+							<span class="btn__text">
+								<span class="btn__label">お電話でご予約・ご相談</span>
+								<small class="btn__note--number"
+									>082-000-0000（受付 10:00〜21:00）</small
+								>
+							</span>
+						</a>
+					</article>
 
-        <!-- ご宴会（電話が主役） -->
-        <article class="scene">
-          <img class="scene__photo" width="1200" height="900" loading="lazy"
-               src="images/kawaoto_07_scene_enkai_800w.webp"
-               srcset="images/kawaoto_07_scene_enkai_800w.webp 800w, images/kawaoto_07_scene_enkai_1200w.webp 1200w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="宴席の膳が整えられた大広間">
-          <h3 class="scene__title">ご宴会（歓迎会・送別会など）</h3>
-          <dl class="scene__info">
-            <div class="scene__row">
-              <dt>人数の目安</dt>
-              <dd>10〜40名様</dd>
-            </div>
-            <div class="scene__row">
-              <dt>ご予算の目安</dt>
-              <dd>
-                お一人様 約13,000円〜13,300円
-                <span class="scene__note">宴席プラン（飲み放題2時間付き）の場合。10名様は中部屋、20〜40名様は大広間</span>
-              </dd>
-            </div>
-            <div class="scene__row">
-              <dt>おすすめのお部屋</dt>
-              <dd>大広間（20名様前後は襖で仕切った半室も可）</dd>
-            </div>
-          </dl>
-          <a class="btn btn--tel scene__cta" href="tel:0820000000">
-            <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-            </svg>
-            <span class="btn__text">
-              <span class="btn__label">お電話でご予約・ご相談</span>
-              <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
-            </span>
-          </a>
-        </article>
+					<!-- 慶事・法事（電話が主役） -->
+					<article class="scene">
+						<img
+							class="scene__photo"
+							width="1200"
+							height="900"
+							loading="lazy"
+							src="images/kawaoto_08_scene_hoji_800w.webp"
+							srcset="
+								images/kawaoto_08_scene_hoji_800w.webp   800w,
+								images/kawaoto_08_scene_hoji_1200w.webp 1200w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="会席の膳が並んだお部屋"
+						/>
+						<h3 class="scene__title">慶事・法事</h3>
+						<dl class="scene__info">
+							<div class="scene__row">
+								<dt>人数の目安</dt>
+								<dd>6〜20名様</dd>
+							</div>
+							<div class="scene__row">
+								<dt>ご予算の目安</dt>
+								<dd>
+									お一人様 約10,400円〜
+									<span class="scene__note"
+										>8名様・中部屋・川音会席8,800円の場合。お飲み物別</span
+									>
+								</dd>
+							</div>
+							<div class="scene__row">
+								<dt>おすすめのお部屋</dt>
+								<dd>中部屋、大広間</dd>
+							</div>
+						</dl>
+						<a class="btn btn--tel scene__cta" href="tel:0820000000">
+							<svg
+								class="btn__icon"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path
+									d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+								/>
+							</svg>
+							<span class="btn__text">
+								<span class="btn__label">お電話でご予約・ご相談</span>
+								<small class="btn__note--number"
+									>082-000-0000（受付 10:00〜21:00）</small
+								>
+							</span>
+						</a>
+					</article>
 
-        <!-- 慶事・法事（電話が主役） -->
-        <article class="scene">
-          <img class="scene__photo" width="1200" height="900" loading="lazy"
-               src="images/kawaoto_08_scene_hoji_800w.webp"
-               srcset="images/kawaoto_08_scene_hoji_800w.webp 800w, images/kawaoto_08_scene_hoji_1200w.webp 1200w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="会席の膳が並んだお部屋">
-          <h3 class="scene__title">慶事・法事</h3>
-          <dl class="scene__info">
-            <div class="scene__row">
-              <dt>人数の目安</dt>
-              <dd>6〜20名様</dd>
-            </div>
-            <div class="scene__row">
-              <dt>ご予算の目安</dt>
-              <dd>
-                お一人様 約10,400円〜
-                <span class="scene__note">8名様・中部屋・川音会席8,800円の場合。お飲み物別</span>
-              </dd>
-            </div>
-            <div class="scene__row">
-              <dt>おすすめのお部屋</dt>
-              <dd>中部屋、大広間</dd>
-            </div>
-          </dl>
-          <a class="btn btn--tel scene__cta" href="tel:0820000000">
-            <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-            </svg>
-            <span class="btn__text">
-              <span class="btn__label">お電話でご予約・ご相談</span>
-              <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
-            </span>
-          </a>
-        </article>
+					<!-- ご旅行・記念日（Web予約が主役。電話は文字のリンク） -->
+					<article class="scene">
+						<img
+							class="scene__photo"
+							width="1200"
+							height="900"
+							loading="lazy"
+							src="images/kawaoto_09_scene_trip_800w.webp"
+							srcset="
+								images/kawaoto_09_scene_trip_800w.webp   800w,
+								images/kawaoto_09_scene_trip_1200w.webp 1200w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="2名分の会席が並んだ小部屋の卓"
+						/>
+						<h3 class="scene__title">ご旅行・記念日</h3>
+						<dl class="scene__info">
+							<div class="scene__row">
+								<dt>人数の目安</dt>
+								<dd>2〜4名様</dd>
+							</div>
+							<div class="scene__row">
+								<dt>ご予算の目安</dt>
+								<dd>
+									お一人様 約11,300円〜15,000円
+									<span class="scene__note"
+										>2名様・小部屋・川音会席8,800円または12,100円の場合。お飲み物別</span
+									>
+								</dd>
+							</div>
+							<div class="scene__row">
+								<dt>おすすめのお部屋</dt>
+								<dd>小部屋</dd>
+							</div>
+						</dl>
+						<a class="btn btn--web btn--web-primary scene__cta" href="#reserve">
+							<svg
+								class="btn__icon"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<rect x="3.5" y="5" width="17" height="15" rx="1.5" />
+								<path d="M3.5 9.5h17M8 3v4M16 3v4" />
+								<circle cx="8" cy="13" r="0.6" />
+								<circle cx="12" cy="13" r="0.6" />
+								<circle cx="16" cy="13" r="0.6" />
+								<circle cx="8" cy="16.5" r="0.6" />
+								<circle cx="12" cy="16.5" r="0.6" />
+							</svg>
+							<span class="btn__text"
+								><span class="btn__label">Webで予約する</span
+								><small>24時間受付</small></span
+							>
+						</a>
+						<a class="scene__tel-link" href="tel:0820000000">
+							<svg
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path
+									d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+								/>
+							</svg>
+							<span class="btn__text">
+								<span class="btn__label">お電話でご予約・ご相談</span>
+								<small class="btn__note--number"
+									>082-000-0000（受付 10:00〜21:00）</small
+								>
+							</span>
+						</a>
+					</article>
+				</div>
+			</section>
 
-        <!-- ご旅行・記念日（Web予約が主役。電話は文字のリンク） -->
-        <article class="scene">
-          <img class="scene__photo" width="1200" height="900" loading="lazy"
-               src="images/kawaoto_09_scene_trip_800w.webp"
-               srcset="images/kawaoto_09_scene_trip_800w.webp 800w, images/kawaoto_09_scene_trip_1200w.webp 1200w"
-               sizes="(min-width: 768px) 640px, 100vw"
-               alt="2名分の会席が並んだ小部屋の卓">
-          <h3 class="scene__title">ご旅行・記念日</h3>
-          <dl class="scene__info">
-            <div class="scene__row">
-              <dt>人数の目安</dt>
-              <dd>2〜4名様</dd>
-            </div>
-            <div class="scene__row">
-              <dt>ご予算の目安</dt>
-              <dd>
-                お一人様 約11,300円〜15,000円
-                <span class="scene__note">2名様・小部屋・川音会席8,800円または12,100円の場合。お飲み物別</span>
-              </dd>
-            </div>
-            <div class="scene__row">
-              <dt>おすすめのお部屋</dt>
-              <dd>小部屋</dd>
-            </div>
-          </dl>
-          <a class="btn btn--web btn--web-primary scene__cta" href="#reserve">
-            <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
-              <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
-              <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
-              <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
-            </svg>
-            <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
-          </a>
-          <a class="scene__tel-link" href="tel:0820000000">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-            </svg>
-            <span class="btn__text">
-              <span class="btn__label">お電話でご予約・ご相談</span>
-              <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
-            </span>
-          </a>
-        </article>
-      </div>
-    </section>
+			<!-- お部屋 -->
+			<section class="rooms" id="rooms" aria-labelledby="rooms-title">
+				<h2 class="section-title" id="rooms-title">お部屋</h2>
 
-    <!-- 以降のセクション（お部屋〜アクセス）は次の作業で追加 -->
-  </main>
+				<div class="rooms__list">
+					<!-- 小部屋 -->
+					<article class="room">
+						<img
+							class="room__photo"
+							width="750"
+							height="500"
+							loading="lazy"
+							src="images/kawaoto_03_room_small_750w.webp"
+							srcset="
+								images/kawaoto_03_room_small_750w.webp   750w,
+								images/kawaoto_03_room_small_1500w.webp 1500w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="床の間のある奥の小部屋"
+						/>
+						<h3 class="room__title">小部屋（2室）</h3>
+						<dl class="room__info">
+							<div class="room__row">
+								<dt>定員</dt>
+								<dd>2〜4名様</dd>
+							</div>
+							<div class="room__row">
+								<dt>室料（1室・税込）</dt>
+								<dd>3,300円</dd>
+							</div>
+							<div class="room__row">
+								<dt>向いているご利用</dt>
+								<dd>少人数のご接待、記念日。最も静かな奥の間</dd>
+							</div>
+						</dl>
+					</article>
 
-  <!-- メニュー（タブレット・スマホ）。タブレットは右からのパネル＋半透明の層、スマホは全画面 -->
-  <div class="menu" id="menu" inert>
-    <div class="menu__panel" role="dialog" aria-modal="true" aria-label="メニュー">
-      <div class="menu__head">
-        <span class="menu__title">メニュー</span>
-        <button class="menu__close" type="button" aria-label="メニューを閉じる">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18"/>
-          </svg>
-        </button>
-      </div>
-      <nav aria-label="ページ内メニュー">
-        <ul class="menu__list">
-          <li><a href="#reasons">選ばれる理由</a></li>
-          <li><a href="#scenes">ご利用シーン</a></li>
-          <li><a href="#rooms">お部屋</a></li>
-          <li><a href="#price">料金</a></li>
-          <li><a href="#faq">よくある質問</a></li>
-          <li><a href="#access">アクセス</a></li>
-        </ul>
-      </nav>
-      <div class="menu__cta">
-        <a class="btn btn--tel" href="tel:0820000000">
-          <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-          </svg>
-          <span class="btn__text">
-            <span class="btn__label">お電話でご予約・ご相談</span>
-            <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
-          </span>
-        </a>
-        <a class="btn btn--web" href="#reserve">
-          <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
-            <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
-            <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
-            <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
-          </svg>
-          <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
-        </a>
-      </div>
-    </div>
-  </div>
+					<!-- 中部屋 -->
+					<article class="room">
+						<img
+							class="room__photo"
+							width="750"
+							height="500"
+							loading="lazy"
+							src="images/kawaoto_10_room_middle_750w.webp"
+							srcset="
+								images/kawaoto_10_room_middle_750w.webp   750w,
+								images/kawaoto_10_room_middle_1500w.webp 1500w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="6〜10名様向けのテーブル席の中部屋"
+						/>
+						<h3 class="room__title">中部屋（2室）</h3>
+						<dl class="room__info">
+							<div class="room__row">
+								<dt>定員</dt>
+								<dd>6〜10名様</dd>
+							</div>
+							<div class="room__row">
+								<dt>室料（1室・税込）</dt>
+								<dd>5,500円</dd>
+							</div>
+							<div class="room__row">
+								<dt>向いているご利用</dt>
+								<dd>ご会食、顔合わせ、法事</dd>
+							</div>
+						</dl>
+					</article>
 
-  <!-- 固定バー（〜1079px）。パターンB：電話番号を見せる。
+					<!-- 大広間 -->
+					<article class="room">
+						<img
+							class="room__photo"
+							width="750"
+							height="500"
+							loading="lazy"
+							src="images/kawaoto_11_room_large_750w.webp"
+							srcset="
+								images/kawaoto_11_room_large_750w.webp   750w,
+								images/kawaoto_11_room_large_1500w.webp 1500w
+							"
+							sizes="(min-width: 768px) 640px, 100vw"
+							alt="襖で仕切ることができる大広間"
+						/>
+						<h3 class="room__title">大広間（1室）</h3>
+						<dl class="room__info">
+							<div class="room__row">
+								<dt>定員</dt>
+								<dd>最大40名様</dd>
+							</div>
+							<div class="room__row">
+								<dt>室料（1室・税込）</dt>
+								<dd>11,000円（襖で仕切った半室は5,500円）</dd>
+							</div>
+							<div class="room__row">
+								<dt>向いているご利用</dt>
+								<dd>歓迎会・送別会などのご宴会</dd>
+							</div>
+						</dl>
+					</article>
+				</div>
+			</section>
+
+			<!-- 以降のセクション（料金〜アクセス）は次の作業で追加 -->
+		</main>
+
+		<!-- メニュー（タブレット・スマホ）。タブレットは右からのパネル＋半透明の層、スマホは全画面 -->
+		<div class="menu" id="menu" inert>
+			<div
+				class="menu__panel"
+				role="dialog"
+				aria-modal="true"
+				aria-label="メニュー"
+			>
+				<div class="menu__head">
+					<span class="menu__title">メニュー</span>
+					<button
+						class="menu__close"
+						type="button"
+						aria-label="メニューを閉じる"
+					>
+						<svg
+							width="28"
+							height="28"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							aria-hidden="true"
+						>
+							<path d="M6 6l12 12M18 6L6 18" />
+						</svg>
+					</button>
+				</div>
+				<nav aria-label="ページ内メニュー">
+					<ul class="menu__list">
+						<li><a href="#reasons">選ばれる理由</a></li>
+						<li><a href="#scenes">ご利用シーン</a></li>
+						<li><a href="#rooms">お部屋</a></li>
+						<li><a href="#price">料金</a></li>
+						<li><a href="#faq">よくある質問</a></li>
+						<li><a href="#access">アクセス</a></li>
+					</ul>
+				</nav>
+				<div class="menu__cta">
+					<a class="btn btn--tel" href="tel:0820000000">
+						<svg
+							class="btn__icon"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path
+								d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+							/>
+						</svg>
+						<span class="btn__text">
+							<span class="btn__label">お電話でご予約・ご相談</span>
+							<small class="btn__note--number"
+								>082-000-0000（受付 10:00〜21:00）</small
+							>
+						</span>
+					</a>
+					<a class="btn btn--web" href="#reserve">
+						<svg
+							class="btn__icon"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="3.5" y="5" width="17" height="15" rx="1.5" />
+							<path d="M3.5 9.5h17M8 3v4M16 3v4" />
+							<circle cx="8" cy="13" r="0.6" />
+							<circle cx="12" cy="13" r="0.6" />
+							<circle cx="16" cy="13" r="0.6" />
+							<circle cx="8" cy="16.5" r="0.6" />
+							<circle cx="12" cy="16.5" r="0.6" />
+						</svg>
+						<span class="btn__text"
+							><span class="btn__label">Webで予約する</span
+							><small>24時間受付</small></span
+						>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 固定バー（〜1079px）。パターンB：電話番号を見せる。
        768px〜はアイコン＋従来の文言、〜767pxはアイコンなし・短い2行の文言 -->
-  <nav class="fixed-bar" aria-label="予約">
-    <div class="fixed-bar__inner">
-      <a class="btn btn--tel" href="tel:0820000000">
-        <span class="btn__desktop">
-          <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"/>
-          </svg>
-          <span class="btn__text">
-            <span class="btn__label">お電話でご予約・ご相談</span>
-            <small class="btn__note--number">082-000-0000（受付 10:00〜21:00）</small>
-          </span>
-        </span>
-        <span class="btn__mobile">
-          <span class="btn__label">電話で予約・相談</span>
-          <small class="btn__note--number">
-            <span class="btn__note-mobile-full">082-000-0000・10〜21時</span>
-            <span class="btn__note-mobile-short">082-000-0000</span>
-          </small>
-        </span>
-      </a>
-      <a class="btn btn--web" href="#reserve">
-        <span class="btn__desktop">
-          <svg class="btn__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3.5" y="5" width="17" height="15" rx="1.5"/>
-            <path d="M3.5 9.5h17M8 3v4M16 3v4"/>
-            <circle cx="8" cy="13" r="0.6"/><circle cx="12" cy="13" r="0.6"/><circle cx="16" cy="13" r="0.6"/>
-            <circle cx="8" cy="16.5" r="0.6"/><circle cx="12" cy="16.5" r="0.6"/>
-          </svg>
-          <span class="btn__text"><span class="btn__label">Webで予約する</span><small>24時間受付</small></span>
-        </span>
-        <span class="btn__mobile">
-          <span class="btn__label">Webで予約</span>
-          <small>24時間受付</small>
-        </span>
-      </a>
-    </div>
-  </nav>
+		<nav class="fixed-bar" aria-label="予約">
+			<div class="fixed-bar__inner">
+				<a class="btn btn--tel" href="tel:0820000000">
+					<span class="btn__desktop">
+						<svg
+							class="btn__icon"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path
+								d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+							/>
+						</svg>
+						<span class="btn__text">
+							<span class="btn__label">お電話でご予約・ご相談</span>
+							<small class="btn__note--number"
+								>082-000-0000（受付 10:00〜21:00）</small
+							>
+						</span>
+					</span>
+					<span class="btn__mobile">
+						<span class="btn__label">電話で予約・相談</span>
+						<small class="btn__note--number">
+							<span class="btn__note-mobile-full">082-000-0000・10〜21時</span>
+							<span class="btn__note-mobile-short">082-000-0000</span>
+						</small>
+					</span>
+				</a>
+				<a class="btn btn--web" href="#reserve">
+					<span class="btn__desktop">
+						<svg
+							class="btn__icon"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="3.5" y="5" width="17" height="15" rx="1.5" />
+							<path d="M3.5 9.5h17M8 3v4M16 3v4" />
+							<circle cx="8" cy="13" r="0.6" />
+							<circle cx="12" cy="13" r="0.6" />
+							<circle cx="16" cy="13" r="0.6" />
+							<circle cx="8" cy="16.5" r="0.6" />
+							<circle cx="12" cy="16.5" r="0.6" />
+						</svg>
+						<span class="btn__text"
+							><span class="btn__label">Webで予約する</span
+							><small>24時間受付</small></span
+						>
+					</span>
+					<span class="btn__mobile">
+						<span class="btn__label">Webで予約</span>
+						<small>24時間受付</small>
+					</span>
+				</a>
+			</div>
+		</nav>
 
-  <script>
-    (function () {
-      var button = document.querySelector('.menu-button');
-      var menu = document.getElementById('menu');
-      var closeButton = menu.querySelector('.menu__close');
-      var isOpen = false;
+		<script>
+			(function () {
+				var button = document.querySelector(".menu-button");
+				var menu = document.getElementById("menu");
+				var closeButton = menu.querySelector(".menu__close");
+				var isOpen = false;
 
-      // 開閉の状態をまとめて切り替える。
-      // 閉じるときは背景の固定を外し、フェードが終わるまでは表示したままにする
-      function setOpen(open, returnFocus) {
-        if (open === isOpen) return;
-        isOpen = open;
-        menu.classList.toggle('is-open', open);
-        menu.inert = !open;
-        button.setAttribute('aria-expanded', String(open));
-        document.documentElement.classList.toggle('is-locked', open);
+				// 開閉の状態をまとめて切り替える。
+				// 閉じるときは背景の固定を外し、フェードが終わるまでは表示したままにする
+				function setOpen(open, returnFocus) {
+					if (open === isOpen) return;
+					isOpen = open;
+					menu.classList.toggle("is-open", open);
+					menu.inert = !open;
+					button.setAttribute("aria-expanded", String(open));
+					document.documentElement.classList.toggle("is-locked", open);
 
-        if (open) {
-          closeButton.focus({ preventScroll: true });
-        } else if (returnFocus) {
-          button.focus({ preventScroll: true });
-        }
-      }
+					if (open) {
+						closeButton.focus({ preventScroll: true });
+					} else if (returnFocus) {
+						button.focus({ preventScroll: true });
+					}
+				}
 
-      button.addEventListener('click', function () { setOpen(true); });
-      closeButton.addEventListener('click', function () { setOpen(false, true); });
+				button.addEventListener("click", function () {
+					setOpen(true);
+				});
+				closeButton.addEventListener("click", function () {
+					setOpen(false, true);
+				});
 
-      // タブレットの半透明の層（パネルの外側）をクリック・タップしたら閉じる
-      menu.addEventListener('click', function (e) {
-        if (e.target === menu) setOpen(false, false);
-      });
+				// タブレットの半透明の層（パネルの外側）をクリック・タップしたら閉じる
+				menu.addEventListener("click", function (e) {
+					if (e.target === menu) setOpen(false, false);
+				});
 
-      // 項目を押したら閉じて、そのままページ内の移動を行う
-      menu.querySelectorAll('a').forEach(function (link) {
-        link.addEventListener('click', function () { setOpen(false, false); });
-      });
+				// 項目を押したら閉じて、そのままページ内の移動を行う
+				menu.querySelectorAll("a").forEach(function (link) {
+					link.addEventListener("click", function () {
+						setOpen(false, false);
+					});
+				});
 
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') setOpen(false, true);
-      });
-    })();
-  </script>
-</body>
+				document.addEventListener("keydown", function (e) {
+					if (e.key === "Escape") setOpen(false, true);
+				});
+			})();
+		</script>
+	</body>
 </html>
