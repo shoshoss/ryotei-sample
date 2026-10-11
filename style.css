@@ -352,6 +352,94 @@ a {
   letter-spacing: 0.04em;
 }
 
+/* ---------- セクション見出し（DESIGN.md §5「セクション見出し」） ----------
+   「選ばれる理由」以降、すべてのセクション見出しで共通に使う */
+.section-title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+  color: var(--color-ink);
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 24px;
+  margin: var(--space-2) auto 0;
+  background: var(--color-ink);
+}
+
+/* ---------- 選ばれる理由 ----------
+   写真(3:2) → 小見出し(h3) → 本文の順で縦に積む。本文は左揃え。
+   ファーストビューの明るいエリアと同じ背景色で、自然に続けて見せる */
+.reasons {
+  background: var(--color-base);
+  padding: var(--space-5) var(--space-2) var(--space-4);
+}
+
+.reasons__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.reason__photo {
+  display: block;
+  width: 100%;
+  height: auto; /* これがないと height 属性の値が優先され、aspect-ratio が効かない */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin: 0 0 var(--space-3);
+}
+
+.reason__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.reason__body {
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+/* CTAブロックの一言（スマホ・タブレットはボタンを固定バーで代用し、一言だけを置く） */
+.cta-line {
+  margin: var(--space-4) 0 0;
+  text-align: center;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+/* タブレット：理由のまとまりの幅を抑えて中央に置く（写真が大きくなりすぎないように） */
+@media (min-width: 768px) {
+  .reasons__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ---------- ボタン（電話・Web予約） ---------- */
 .btn {
   display: flex;
@@ -626,6 +714,11 @@ a {
   .hero__photo {
     height: calc(100vh - var(--band-height) - var(--header-height) - var(--fv-peek));
     height: calc(100svh - var(--band-height) - var(--header-height) - var(--fv-peek));
+  }
+
+  /* ページ内リンクで移動したとき、見出しが固定ヘッダーに隠れないようにする */
+  #reasons {
+    scroll-margin-top: var(--header-height);
   }
 
   .site-header {
