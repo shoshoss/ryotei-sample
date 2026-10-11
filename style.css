@@ -32,7 +32,7 @@
   --font-gothic: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif;
 
   --band-height: 31px; /* サンプル表記の帯（スマホは1行） */
-  --bar-height: 80px; /* 固定バー（〜1079px）の目安。ボタン64px＋上下の余白8px×2（safe-areaは別途加算） */
+  --bar-height: 81px; /* 固定バー（〜1079px）の目安。ボタン64px＋上下の余白8px×2＋上辺の罫線1px（safe-areaは別途加算） */
   --header-height: 64px; /* 固定ヘッダー（1080px〜） */
   --fv-peek: 30px; /* 写真の下に、明るいエリアをのぞかせる高さ */
   --fv-photo-min: 470px; /* キャッチとサブコピーが重ならない、写真の最低の高さ（実測: キャッチ下端290px＋サブコピー163px＋余白17px） */
@@ -1125,6 +1125,100 @@ a {
   }
 }
 
+/* ---------- よくある質問 ----------
+   罫線で区切ったアコーディオン。カード枠・影は使わない（DESIGN.md「よくある質問」） */
+.faq {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+.faq__list {
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.faq__question {
+  margin: 0;
+}
+
+.faq__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 48px;
+  padding: 16px 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--color-ink);
+}
+
+.faq__q-mark {
+  flex: none;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.04em;
+}
+
+.faq__q-text {
+  flex: 1 1 auto;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.06em;
+}
+
+.faq__chevron {
+  flex: none;
+  transition: transform 0.2s;
+}
+
+.faq__trigger[aria-expanded="true"] .faq__chevron {
+  transform: rotate(180deg);
+}
+
+.faq__answer {
+  padding: 0 0 var(--space-3);
+}
+
+.faq__answer-text {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+  text-align: left;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.faq__a-mark {
+  flex: none;
+  width: 19px;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 768px) {
+  .faq__list {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ---------- ボタン（電話・Web予約） ---------- */
 .btn {
   display: flex;
@@ -1457,7 +1551,8 @@ a {
   #price,
   #support,
   #flow,
-  #reserve {
+  #reserve,
+  #faq {
     scroll-margin-top: var(--header-height);
   }
 
