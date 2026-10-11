@@ -447,6 +447,133 @@ a {
   }
 }
 
+/* ---------- ご利用シーン ---------- */
+.scenes {
+  background: var(--color-base);
+  padding: var(--space-5) var(--content-pad) var(--space-4);
+}
+
+/* 短いリード文は中央揃え（DESIGN.md §3） */
+.scenes__lead {
+  max-width: 30em;
+  margin: var(--space-2) auto 0;
+  text-align: center;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+}
+
+.scenes__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.scene__photo {
+  display: block;
+  width: 100%;
+  height: auto; /* height属性より先にこれがないと aspect-ratio が効かない */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin: 0 0 var(--space-3);
+}
+
+.scene__title {
+  margin: 0 0 var(--space-2);
+  text-align: left;
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.6;
+  letter-spacing: 0.1em;
+  color: var(--color-ink);
+}
+
+.scene__info {
+  margin: 0 0 var(--space-3);
+}
+
+.scene__row {
+  display: flex;
+  gap: var(--space-2);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.scene__row:first-child {
+  border-top: 1px solid var(--color-line);
+}
+
+.scene__row dt {
+  flex: 0 0 128px; /* 「おすすめのお部屋」(8字)が1行に収まる幅 */
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.scene__row dd {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+.scene__note {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+/* ご旅行・記念日だけ：Web予約を主役にする（背景 墨、文字 白）。
+   .btn--web とセットで使うため、詳細度を上げて確実に上書きする */
+.btn--web.btn--web-primary {
+  background: var(--color-ink);
+  color: #FFFFFF;
+  border: none;
+}
+
+@media (hover: hover) {
+  .btn--web.btn--web-primary:hover {
+    background: var(--color-ink);
+    color: #FFFFFF;
+  }
+}
+
+/* ご旅行・記念日の電話：文字のリンク（藍は使わない） */
+.scene__tel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.scene__tel-link .btn__label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* タブレット：カード1枚ずつの幅を抑えて中央に置く（「選ばれる理由」と同じ考え方） */
+@media (min-width: 768px) {
+  .scene {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* ---------- ボタン（電話・Web予約） ---------- */
 .btn {
   display: flex;
@@ -773,7 +900,8 @@ a {
   }
 
   /* ページ内リンクで移動したとき、見出しが固定ヘッダーに隠れないようにする */
-  #reasons {
+  #reasons,
+  #scenes {
     scroll-margin-top: var(--header-height);
   }
 
