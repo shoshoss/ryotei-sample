@@ -1219,6 +1219,92 @@ a {
   }
 }
 
+/* ---------- アクセス ----------
+   区切りのセクション背景は石灰（DESIGN.md §2）。最後に「ページ最後」のCTAの一言を続ける */
+/* 石灰の背景はセクション全体。生成りのCTAはその中で全幅の帯として続ける（左右の余白は各ブロック側で持つ） */
+.access {
+  background: var(--color-stone);
+  padding-top: var(--space-5);
+}
+
+.access__info {
+  margin-top: var(--space-4);
+  padding: 0 var(--content-pad);
+}
+
+.access__list {
+  margin: 0;
+}
+
+.access__row {
+  display: flex;
+  gap: var(--space-2);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.access__row:first-child {
+  border-top: 1px solid var(--color-line);
+}
+
+.access__row dt {
+  flex: 0 0 88px;
+  font-family: var(--font-gothic);
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+}
+
+.access__row dd {
+  flex: 1 1 auto;
+  margin: 0;
+  font-family: var(--font-gothic);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.05em;
+  color: var(--color-ink);
+}
+
+/* CTAの一言は、生成りの面に戻して続ける（DESIGN.md「CTAブロック」）。全幅の帯にし、左右の余白は内側に持つ */
+.access .cta-line {
+  margin: var(--space-5) 0 0;
+  padding: var(--space-4) var(--content-pad);
+  background: var(--color-base);
+}
+
+@media (min-width: 768px) {
+  .access__info {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ---------- フッター ----------
+   サンプル表記の帯と同じ配色（DESIGN.md「サンプル表記」） */
+.site-footer {
+  padding: var(--space-4) var(--content-pad);
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+  text-align: center;
+}
+
+.site-footer__name {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-mincho);
+  font-weight: 500;
+  font-size: 19px;
+  letter-spacing: 0.1em;
+}
+
+.site-footer__sample {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+}
+
 /* ---------- ボタン（電話・Web予約） ---------- */
 .btn {
   display: flex;
