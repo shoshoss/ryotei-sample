@@ -1220,8 +1220,8 @@ a {
 }
 
 /* ---------- アクセス ----------
-   区切りのセクション背景は石灰（DESIGN.md §2）。最後に「ページ最後」のCTAの一言を続ける */
-/* 石灰の背景はセクション全体。生成りのCTAはその中で全幅の帯として続ける（左右の余白は各ブロック側で持つ） */
+   区切りのセクション背景は石灰（DESIGN.md §2） */
+
 .access {
   background: var(--color-stone);
   padding-top: var(--space-5);
@@ -1266,11 +1266,11 @@ a {
   color: var(--color-ink);
 }
 
-/* CTAの一言は、生成りの面に戻して続ける（DESIGN.md「CTAブロック」）。全幅の帯にし、左右の余白は内側に持つ */
-.access .cta-line {
-  margin: var(--space-5) 0 0;
-  padding: var(--space-4) var(--content-pad);
-  background: var(--color-base);
+/* スマホ・タブレットの最後の予約導線は固定バーに集約する。 */
+@media (max-width: 1079px) {
+  .access {
+    padding-bottom: var(--space-5);
+  }
 }
 
 @media (min-width: 768px) {
