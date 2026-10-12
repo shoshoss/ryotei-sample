@@ -427,7 +427,7 @@ a {
   color: var(--color-ink);
 }
 
-/* CTAブロックの一言（スマホ・タブレットはボタンを固定バーで代用し、一言だけを置く） */
+/* 相談の一言。ボタンの有無はセクションごとの予約導線ルールに従う。 */
 .cta-line {
   margin: var(--space-4) 0 0;
   text-align: center;
@@ -493,7 +493,7 @@ a {
 }
 
 .scene__info {
-  margin: 0 0 var(--space-3);
+  margin: 0;
 }
 
 .scene__row {
@@ -533,36 +533,6 @@ a {
   line-height: 1.7;
   letter-spacing: 0.04em;
   color: var(--color-muted);
-}
-
-/* ご旅行・記念日だけ：Web予約を主役にする（背景 墨、文字 白）。
-   .btn--web とセットで使うため、詳細度を上げて確実に上書きする */
-.btn--web.btn--web-primary {
-  background: var(--color-ink);
-  color: #FFFFFF;
-  border: none;
-}
-
-@media (hover: hover) {
-  .btn--web.btn--web-primary:hover {
-    background: var(--color-ink);
-    color: #FFFFFF;
-  }
-}
-
-/* ご旅行・記念日の電話：文字のリンク（藍は使わない） */
-.scene__tel-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: var(--space-2);
-  color: var(--color-ink);
-  text-decoration: none;
-}
-
-.scene__tel-link .btn__label {
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 /* タブレット：カード1枚ずつの幅を抑えて中央に置く（「選ばれる理由」と同じ考え方） */
@@ -1784,6 +1754,8 @@ a {
 
   .scenes__lead { font-size: 17px; }
 
+  .price-table__note { text-align: center; }
+
   .price-line__price,
   .price-table__amount,
   .estimate__per-person-amount { font-size: 32px; }
@@ -1841,11 +1813,11 @@ a {
 
 /* PCの理由・シーン・お部屋。ラッパーは1079px以下では既存の並びを保つ。 */
 .reason__text,
-.room__text,
-.scene__actions { display: contents; }
-.reasons__cta { display: none; }
+.room__text { display: contents; }
 
 @media (min-width: 1080px) {
+  main > section.reasons { padding-bottom: var(--space-5); }
+  main > section.scenes { padding-top: var(--space-5); }
   .reasons__list,
   .rooms__list { max-width: var(--content-max); gap: var(--space-5); }
   .reason {
@@ -1861,14 +1833,6 @@ a {
   .room__text { display: block; min-width: 0; }
   .reason__photo,
   .room__photo { margin: 0; }
-  .reasons .cta-line { margin-top: var(--space-5); }
-  .reasons__cta {
-    display: grid;
-    grid-template-columns: 400px 280px;
-    justify-content: center;
-    gap: var(--space-3);
-    margin-top: var(--space-3);
-  }
   .scenes__list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1876,16 +1840,12 @@ a {
   }
   .scene {
     display: grid;
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto auto 1fr;
     min-width: 0;
     max-width: none;
     margin: 0;
   }
   .scene__row dd { min-width: 0; }
-  .scene__actions { display: flex; flex-direction: column; align-items: stretch; }
-  .scene:nth-child(n + 3) .scene__actions { min-height: 128px; }
-  .scene__tel-link { min-height: 48px; align-self: flex-start; line-height: 1.4; }
-  .scene__tel-link small { font-size: 14px; }
   .room {
     display: grid;
     grid-template-columns: 60% minmax(0, 1fr);
