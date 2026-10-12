@@ -1605,6 +1605,12 @@ a {
   }
 }
 
+/* PC専用の予約導線・区切り文字はスマホとタブレットでは表示しない。 */
+.hero__cta,
+.trust__separator {
+  display: none;
+}
+
 /* ---------- PC（1080px〜）：固定ヘッダーに切り替え、固定バー・三本線メニューは使わない ---------- */
 @media (min-width: 1080px) {
   :root {
@@ -1620,8 +1626,8 @@ a {
 
   body {
     padding-bottom: 0;
-    /* 固定ヘッダーの高さ分、ページ先頭に余白を確保する */
-    padding-top: var(--header-height);
+    /* stickyヘッダー自身が通常フローの高さを持つ。 */
+    padding-top: 0;
   }
 
   /* 固定バーの代わりに、固定ヘッダーの高さを引く */
@@ -1630,15 +1636,8 @@ a {
     height: calc(100svh - var(--band-height) - var(--header-height) - var(--fv-peek));
   }
 
-  /* ページ内リンクで移動したとき、見出しが固定ヘッダーに隠れないようにする */
-  #reasons,
-  #scenes,
-  #rooms,
-  #price,
-  #support,
-  #flow,
-  #reserve,
-  #faq {
+  /* 全セクションで固定ヘッダー分の余白をとる。#topはページ先頭へ戻す。 */
+  main section[id] {
     scroll-margin-top: var(--header-height);
   }
 
@@ -1646,16 +1645,16 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-4);
-    position: fixed;
+    gap: var(--space-2);
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
     z-index: 15;
     height: var(--header-height);
-    padding-inline: max(40px, calc((100% - 1120px) / 2));
+    padding-inline: max(var(--content-pad), calc((100% - var(--content-max)) / 2));
     background: var(--color-ink);
-    color: #FFFFFF;
+    color: var(--color-on-dark);
   }
 
   .site-header .logo {
@@ -1670,7 +1669,7 @@ a {
 
   .site-nav__list {
     display: flex;
-    gap: var(--space-4);
+    gap: clamp(8px, 1.65vw, 24px);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -1678,7 +1677,12 @@ a {
 
   .site-nav__list a {
     position: relative;
-    display: inline-block; /* ::afterのwidth:100%を文字幅に対して解決させるため */
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    min-width: 48px;
+    justify-content: center;
+    white-space: nowrap;
     color: #FFFFFF;
     text-decoration: none;
     font-family: var(--font-mincho);
@@ -1711,7 +1715,7 @@ a {
   }
 
   .header-tel__text small {
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 0.04em;
     color: var(--color-on-dark);
   }
@@ -1751,6 +1755,87 @@ a {
 @media (min-width: 1080px) {
   .header-tel:focus-visible::after {
     transform: scaleX(1);
+  }
+}
+
+/* ---------- PC共通の寸法・文字とファーストビュー ---------- */
+@media (min-width: 1080px) {
+  :root {
+    --pc-gutter: max(var(--content-pad), calc((100vw - var(--content-max)) / 2));
+  }
+
+  main > section:not(.hero) {
+    padding: var(--space-6) var(--pc-gutter);
+  }
+
+  .site-footer {
+    padding-inline: var(--pc-gutter);
+  }
+
+  .section-title,
+  .estimates__title { font-size: 32px; }
+
+  .reason__title,
+  .scene__title,
+  .room__title,
+  .price-table__name,
+  .estimate__title,
+  .flow__group-title { font-size: 22px; }
+
+  .scenes__lead { font-size: 17px; }
+
+  .price-line__price,
+  .price-table__amount,
+  .estimate__per-person-amount { font-size: 32px; }
+
+  .price-line__note,
+  .scene__note,
+  .price-table__tax,
+  .price-table__note,
+  .estimate__label,
+  .estimate__per-person-label,
+  .estimate__per-person-note,
+  .reserve-form__note,
+  .site-footer__sample,
+  .btn small { font-size: 14px; }
+
+  main .btn { min-height: 64px; }
+
+  .site-header .logo { min-height: 48px; align-items: center; }
+  .site-header .logo__small { font-size: 16px; }
+  .site-header .logo__large { font-size: 36px; }
+  .site-nav__list a { font-size: clamp(14px, 1.12vw, 16px); }
+  .site-header__actions { gap: var(--space-2); }
+  .header-tel { min-height: 48px; }
+  .site-header .btn--web { padding-inline: var(--space-2); }
+  .site-header :focus-visible { outline-color: var(--color-on-dark); }
+
+  .hero__photo { min-height: 640px; }
+  .hero__photo img { object-position: 15% 50%; }
+  .hero__copy {
+    top: var(--space-5);
+    left: var(--pc-gutter);
+    font-size: 44px;
+  }
+  .hero__sub {
+    padding: 48px var(--pc-gutter) var(--space-4);
+    font-size: 18px;
+  }
+  .hero__sub-text { display: block; max-width: 38em; }
+  .hero__info { padding: var(--space-4) var(--pc-gutter) 0; }
+  .trust { padding: var(--space-3) 0 var(--space-4); }
+  .trust__text,
+  .price-line__course { font-size: 16px; }
+  .trust__text br { display: none; }
+  .trust__separator { display: inline; }
+  .trust__item + .trust__item { border-color: var(--color-ink); }
+  .price-line { padding-block: var(--space-3); border-color: var(--color-ink); }
+  .hero__cta {
+    display: grid;
+    grid-template-columns: 400px 280px;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
   }
 }
 

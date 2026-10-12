@@ -15,7 +15,7 @@
 		/>
 		<link rel="stylesheet" href="style.css" />
 	</head>
-	<body>
+	<body id="top">
 		<!-- サンプル表記（上部の帯）。スマホ（〜767px）は短い1行、768px〜はCONTENT.mdの全文 -->
 		<p class="sample-band">
 			<span class="sample-band__short"
@@ -26,7 +26,7 @@
 			>
 		</p>
 
-		<!-- 固定ヘッダー（PC・1080px〜のみ表示。references/kawaoto_pc_01_fv_v1.png に合わせる） -->
+		<!-- PCヘッダー：サンプル帯の後から始まり、スクロール後は画面上端に留まる -->
 		<header class="site-header">
 			<a class="logo" href="#top" aria-label="料亭 川音">
 				<span class="logo__small">料亭</span
@@ -155,7 +155,7 @@
 					</h1>
 
 					<p class="hero__sub">
-						川のほとりの料亭。料理長が瀬戸内の旬で仕立てる会席で、大切な席をおもてなしいたします。
+						<span class="hero__sub-text">川のほとりの料亭。料理長が瀬戸内の旬で仕立てる会席で、大切な席をおもてなしいたします。</span>
 					</p>
 				</div>
 
@@ -204,7 +204,7 @@
 								<circle cx="18.5" cy="9.5" r="1.9" />
 								<path d="M21.5 17.5v-.6a3 3 0 0 0-4.2-2.75" />
 							</svg>
-							<span class="trust__text">全室個室<br />2〜40名様</span>
+							<span class="trust__text">全室個室<span class="trust__separator">・</span><br />2〜40名様</span>
 						</li>
 						<li class="trust__item">
 							<svg
@@ -238,6 +238,58 @@
 						<span class="price-line__price">8,800円〜</span>
 						<span class="price-line__note">（税込）</span>
 					</p>
+					<div class="hero__cta">
+					<a class="btn btn--tel" href="tel:0820000000">
+						<svg
+							class="btn__icon"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path
+								d="M7 3.5h2.5l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5V17a2 2 0 0 1-2 2A15.5 15.5 0 0 1 5 5.5a2 2 0 0 1 2-2Z"
+							/>
+						</svg>
+						<span class="btn__text">
+							<span class="btn__label">お電話でご予約・ご相談</span>
+							<small class="btn__note--number"
+								>082-000-0000（受付 10:00〜21:00）</small
+							>
+						</span>
+					</a>
+					<a class="btn btn--web" href="#reserve">
+						<svg
+							class="btn__icon"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<rect x="3.5" y="5" width="17" height="15" rx="1.5" />
+							<path d="M3.5 9.5h17M8 3v4M16 3v4" />
+							<circle cx="8" cy="13" r="0.6" />
+							<circle cx="12" cy="13" r="0.6" />
+							<circle cx="16" cy="13" r="0.6" />
+							<circle cx="8" cy="16.5" r="0.6" />
+							<circle cx="12" cy="16.5" r="0.6" />
+						</svg>
+						<span class="btn__text"
+							><span class="btn__label">Webで予約する</span
+							><small>24時間受付</small></span
+						>
+					</a>
+				</div>
 				</div>
 			</section>
 
