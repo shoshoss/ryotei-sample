@@ -1455,8 +1455,9 @@ a {
 /* ---------- メニュー（タブレット・スマホ） ----------
    .menu は外側の層（スマホは見えない。タブレットは半透明の暗い層）。
    .menu__panel が中身で、スマホは全画面、タブレットは右からスライドする幅380pxのパネル。
-   開閉は透明度だけで変える（DESIGN.md §5 の「浮き上がる動き」は使わない）。
-   閉じるときは、フェードが終わってから見えなくする */
+   スマホは透明度だけで開閉する。タブレットはパネルが右からスライドする（transform）。
+   動きは ease-out（開く0.3秒・閉じる0.25秒）。閉じるときは、動きが終わってから見えなくする。
+   overflow: clip で、画面の外に出たパネルを外枠の中で切り取り、ページの横幅を広げない */
 .menu {
   position: fixed;
   inset: 0;
@@ -1464,13 +1465,14 @@ a {
   background: transparent;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  overflow: clip;
+  transition: opacity 0.25s ease-out, visibility 0s linear 0.25s;
 }
 
 .menu.is-open {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.3s ease, visibility 0s linear 0s;
+  transition: opacity 0.3s ease-out, visibility 0s linear 0s;
 }
 
 .menu__panel {
@@ -1570,21 +1572,33 @@ a {
 
 /* ---------- タブレット（768〜1079px）：右からスライドするパネル＋半透明の層 ---------- */
 @media (min-width: 768px) and (max-width: 1079px) {
+  /* 暗い層はパネルと同時に透明度を変える（.menu 自体は常に不透明にして、背景色だけ動かす） */
+  .menu,
+  .menu.is-open {
+    opacity: 1;
+  }
+
+  .menu {
+    background: rgba(33, 24, 21, 0);
+    transition: background-color 0.25s ease-out, visibility 0s linear 0.25s;
+  }
+
   .menu.is-open {
     background: rgba(33, 24, 21, 0.5);
+    transition: background-color 0.3s ease-out, visibility 0s linear 0s;
   }
 
   .menu__panel {
     left: auto;
     width: var(--menu-panel-width);
     border-left: 1px solid var(--color-line);
-    /* 閉じたパネルの矩形自体を画面内に保ち、右外へのはみ出しを作らない。 */
-    clip-path: inset(0 0 0 100%);
-    transition: clip-path 0.3s ease;
+    transform: translateX(100%);
+    transition: transform 0.25s ease-out;
   }
 
   .menu.is-open .menu__panel {
-    clip-path: inset(0);
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
   }
 }
 
