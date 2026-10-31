@@ -48,6 +48,7 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -1050,6 +1051,28 @@ a {
   color: var(--color-ink);
 }
 
+/* iPhoneのSafariは date / time / select を独自の部品として描画し、width:100% を無視して
+   中身の幅まで広がる。幅の上限と最小幅を明示して親の幅に収める。
+   select は矢印が消えるので appearance は外さず、date / time だけ外す */
+.reserve-form__input {
+  min-width: 0;
+  max-width: 100%;
+  text-align: left;
+}
+
+/* appearance を外すと、iPhoneでは値が空のときに日付欄の高さが潰れるため min-height を再指定する */
+.reserve-form__input[type="date"],
+.reserve-form__input[type="time"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 48px;
+}
+
+.reserve-form__input::-webkit-date-and-time-value {
+  min-height: 1.5em;
+  text-align: left;
+}
+
 .reserve-form__textarea {
   min-height: 112px;
   resize: vertical;
@@ -1432,8 +1455,9 @@ a {
 /* ---------- メニュー（タブレット・スマホ） ----------
    .menu は外側の層（スマホは見えない。タブレットは半透明の暗い層）。
    .menu__panel が中身で、スマホは全画面、タブレットは右からスライドする幅380pxのパネル。
-   開閉は透明度だけで変える（DESIGN.md §5 の「浮き上がる動き」は使わない）。
-   閉じるときは、フェードが終わってから見えなくする */
+   スマホは透明度だけで開閉する。タブレットはパネルが右からスライドする（transform）。
+   動きは ease-out（開く0.3秒・閉じる0.25秒）。閉じるときは、動きが終わってから見えなくする。
+   overflow: clip で、画面の外に出たパネルを外枠の中で切り取り、ページの横幅を広げない */
 .menu {
   position: fixed;
   inset: 0;
@@ -1441,13 +1465,14 @@ a {
   background: transparent;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  overflow: clip;
+  transition: opacity 0.25s ease-out, visibility 0s linear 0.25s;
 }
 
 .menu.is-open {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.3s ease, visibility 0s linear 0s;
+  transition: opacity 0.3s ease-out, visibility 0s linear 0s;
 }
 
 .menu__panel {
@@ -1547,8 +1572,20 @@ a {
 
 /* ---------- タブレット（768〜1079px）：右からスライドするパネル＋半透明の層 ---------- */
 @media (min-width: 768px) and (max-width: 1079px) {
+  /* 暗い層はパネルと同時に透明度を変える（.menu 自体は常に不透明にして、背景色だけ動かす） */
+  .menu,
+  .menu.is-open {
+    opacity: 1;
+  }
+
+  .menu {
+    background: rgba(33, 24, 21, 0);
+    transition: background-color 0.25s ease-out, visibility 0s linear 0.25s;
+  }
+
   .menu.is-open {
     background: rgba(33, 24, 21, 0.5);
+    transition: background-color 0.3s ease-out, visibility 0s linear 0s;
   }
 
   .menu__panel {
@@ -1556,11 +1593,12 @@ a {
     width: var(--menu-panel-width);
     border-left: 1px solid var(--color-line);
     transform: translateX(100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease-out;
   }
 
   .menu.is-open .menu__panel {
     transform: translateX(0);
+    transition: transform 0.3s ease-out;
   }
 }
 
