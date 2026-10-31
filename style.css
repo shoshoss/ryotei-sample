@@ -1051,6 +1051,28 @@ a {
   color: var(--color-ink);
 }
 
+/* iPhoneのSafariは date / time / select を独自の部品として描画し、width:100% を無視して
+   中身の幅まで広がる。幅の上限と最小幅を明示して親の幅に収める。
+   select は矢印が消えるので appearance は外さず、date / time だけ外す */
+.reserve-form__input {
+  min-width: 0;
+  max-width: 100%;
+  text-align: left;
+}
+
+/* appearance を外すと、iPhoneでは値が空のときに日付欄の高さが潰れるため min-height を再指定する */
+.reserve-form__input[type="date"],
+.reserve-form__input[type="time"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 48px;
+}
+
+.reserve-form__input::-webkit-date-and-time-value {
+  min-height: 1.5em;
+  text-align: left;
+}
+
 .reserve-form__textarea {
   min-height: 112px;
   resize: vertical;
